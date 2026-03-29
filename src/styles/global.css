@@ -20,6 +20,15 @@
     --color-site-text: light-dark(#1e293b, #ffffff);
     --color-dot: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.15));
 
+    --background-brand-gradient: linear-gradient(
+        135deg, 
+        var(--color-cyan) 0%, 
+        var(--color-blue) 50%, 
+        var(--color-purple) 100%
+    );
+
+    --color-cyan-glow: rgba(0, 193, 253, 0.5);
+
     --name-gradient: linear-gradient(
         to right, 
         var(--color-cyan), 
@@ -112,6 +121,47 @@
                 animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
     }
 
+    .btn-cyber {
+        background: var(--background-brand-gradient);
+        background-size: 200% auto;
+        color: white;
+        transition: all 0.4s ease;
+        box-shadow: 0 0px 10px var(--color-cyan-glow);
+    }
+    .btn-cyber:hover {
+        background-position: right center; /* Desplaza el degradado */
+        box-shadow: 0 0 15px var(--color-cyan);
+        transform: scale(1.05);
+    }
+
+    .btn-glass-neon {
+        background: rgba(0, 193, 253, 0.05);
+        border: 1px solid rgba(0, 193, 253, 0.2);
+        backdrop-filter: blur(8px);
+        color: var(--color-cyan);
+        transition: all 0.3s ease;
+    }
+
+    .btn-glass-neon:hover {
+        background: rgba(0, 193, 253, 0.1);
+        border-color: var(--color-cyan);
+        box-shadow: 0 0 20px rgba(0, 193, 253, 0.4), inset 0 0 10px rgba(0, 193, 253, 0.2);
+        color: white;
+    }
+
+    .btn-outline-tech {
+        border: 1px solid transparent;
+        background: linear-gradient(var(--bg-bottom), var(--bg-bottom)) padding-box,
+                    var(--background-brand-gradient) border-box;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-tech:hover {
+        box-shadow: 0 0 20px var(--color-cyan-glow);
+        transform: scale(1.02);
+    }
+
     .card-border-glow {
         position: relative;
         border-radius: 1rem;
@@ -174,6 +224,16 @@
 
     .floating {
         animation: float 6s ease-in-out infinite;
+    }
+
+    .wave-letter {
+        display: inline-block;
+        transition: transform 0.15s ease-out;
+        will-change: transform;
+    }
+
+    .group:hover .wave-letter {
+        animation: wave 0.6s ease forwards;
     }
 }
 
@@ -240,4 +300,11 @@
             filter: blur(0);
     opacity: 1;
   }
+}
+
+@keyframes wave {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-12px); }
+  60% { transform: translateY(4px); }
+  100% { transform: translateY(0); }
 }
