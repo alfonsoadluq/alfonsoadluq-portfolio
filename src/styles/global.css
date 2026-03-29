@@ -225,16 +225,6 @@
     .floating {
         animation: float 6s ease-in-out infinite;
     }
-
-    .wave-letter {
-        display: inline-block;
-        transition: transform 0.15s ease-out;
-        will-change: transform;
-    }
-
-    .group:hover .wave-letter {
-        animation: wave 0.6s ease forwards;
-    }
 }
 
 /* ==========================================================================
@@ -300,11 +290,4 @@
             filter: blur(0);
     opacity: 1;
   }
-}
-
-@keyframes wave {
-  0% { transform: translateY(0); }
-  30% { transform: translateY(-12px); }
-  60% { transform: translateY(4px); }
-  100% { transform: translateY(0); }
 }
