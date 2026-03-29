@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Custom variant for data-theme="dark" */
+/* Variante para detectar el modo oscuro vía data-theme */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
@@ -8,30 +8,33 @@
     --breakpoint-3xl: 120rem;
     --breakpoint-4xl: 160rem;
 
-    --cyan: #00C1FD;
-    --blue: #2563EB;
-    --purple: #8B5CF6;
+    --color-cyan: #00C1FD;
+    --color-blue: #2563EB;
+    --color-purple: #8B5CF6;
+    
     --bg-top: #050b18;
     --bg-bottom: #020617;
-    --text-muted: #94A3B8;
+    --text-muted: #fffff;
 
     --color-site-bg: light-dark(#ffffff, #030712);
+    --color-site-text: light-dark(#1e293b, #ffffff);
     --color-dot: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.15));
 
     --name-gradient: linear-gradient(
         to right, 
-        var(--cyan), 
-        var(--blue), 
-        var(--purple), 
-        var(--blue), 
-        var(--cyan)
+        var(--color-cyan), 
+        var(--color-blue), 
+        var(--color-purple), 
+        var(--color-blue), 
+        var(--color-cyan)
     );
 }
 
+/* ==========================================================================
+   2. ESTILOS BASE (HTML, Body, Scroll)
+   ========================================================================== */
 @layer base {
-    :root { 
-        color-scheme: light dark; 
-    }
+    :root { color-scheme: light dark; }
 
     [data-theme="light"] { color-scheme: light; }
     [data-theme="dark"] { color-scheme: dark; }
@@ -49,12 +52,48 @@
         background-color: var(--color-site-bg);
         color: var(--color-site-text);
         min-height: 100vh;
-        /* Smooth transition for background and text colors */
         transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s ease;
+    }
+
+    h1{
+        font-size: 5rem;
+        font-weight: 900;
+    }
+
+    p {
+        font-size: 20px;
     }
 }
 
+/* ==========================================================================
+   3. UTILIDADES PERSONALIZADAS
+   ========================================================================== */
 @layer utilities {
+    .cursor {
+        position: fixed;
+        top: -300px;
+        left: -300px;
+        width: 600px;
+        height: 600px;
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0; 
+        translate: var(--x, 50vw) var(--y, 50vh);
+        scale: var(--cursor-scale, 1);
+        transition: opacity 0.5s ease, scale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: translate, scale;
+    }
+
+    [data-theme="light"] .cursor {
+        background: radial-gradient(circle, rgba(0, 190, 253, 0.25) 0%, transparent 30%);
+        mix-blend-mode: multiply;
+    }
+
+    [data-theme="dark"] .cursor {
+        background: radial-gradient(circle, rgba(0, 190, 253, 0.15) 0%, transparent 30%);
+        mix-blend-mode: screen;
+    }
+
     .animate-gradient-text {
         display: inline-block;
         padding-bottom: 0.15em;
@@ -68,6 +107,11 @@
         animation: shine 6s linear infinite;
     }
 
+    .slide-in-blurred-top {
+        -webkit-animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+                animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+    }
+
     .card-border-glow {
         position: relative;
         border-radius: 1rem;
@@ -76,6 +120,7 @@
         overflow: hidden;
     }
 
+    /* MODIFICACIÓN: Añadimos transición y opacidad 0 al brillo */
     .card-border-glow::before {
         content: "";
         position: absolute;
@@ -85,11 +130,17 @@
         height: 200%;
         background: conic-gradient(
             transparent, 
-            var(--cyan), 
-            var(--purple), 
+            var(--color-cyan), 
+            var(--color-purple), 
             transparent 30%
         );
         animation: rotate 4s linear infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .card-border-glow:hover::before {
+        opacity: 1;
     }
 
     .card-content {
@@ -116,14 +167,7 @@
     .divider-beam {
         height: 1px;
         width: 100%;
-        background: linear-gradient(
-            to right,
-            transparent,
-            rgba(0, 193, 253, 0.1),
-            var(--cyan),
-            rgba(139, 92, 246, 0.1),
-            transparent
-        );
+        background: linear-gradient(to right, transparent, rgba(0, 193, 253, 0.1), var(--color-cyan), rgba(139, 92, 246, 0.1), transparent);
         background-size: 200% 100%;
         animation: beam 4s infinite linear;
     }
@@ -131,24 +175,69 @@
     .floating {
         animation: float 6s ease-in-out infinite;
     }
+}
 
-    @keyframes shine {
-        from { background-position: 0% center; }
-        to { background-position: -200% center; }
-    }
+/* ==========================================================================
+4. ANIMACIONES (Keyframes)
+========================================================================== */
 
-    @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
+@keyframes shine {
+    from { background-position: 0% center; }
+    to { background-position: -200% center; }
+}
 
-    @keyframes beam {
-        from { background-position: 200% 0; }
-        to { background-position: -200% 0; }
-    }
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
-    @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-15px); }
-    }
+@keyframes beam {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+@-webkit-keyframes slide-in-blurred-top {
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-blurred-top {
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
 }

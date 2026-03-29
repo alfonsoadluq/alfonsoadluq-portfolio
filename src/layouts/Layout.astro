@@ -27,6 +27,7 @@ import Footer from '../components/Footer.astro';
 		</script>
 	</head>
 	<body>
+		<div id="cursor" class="cursor"></div>
 		<Header />
 		<slot />
 		<Footer />
@@ -41,3 +42,30 @@ import Footer from '../components/Footer.astro';
 		height: 100%;
 	}
 </style>
+
+<script>
+    function initCursor() {
+        const cursor = document.getElementById('cursor');
+        if (!cursor) return;
+
+        let isMouseMoved = false;
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isMouseMoved) {
+                cursor.style.opacity = '1';
+                isMouseMoved = true;
+            }
+            
+            cursor.style.setProperty('--x', `${e.clientX}px`);
+            cursor.style.setProperty('--y', `${e.clientY}px`);
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+            isMouseMoved = false;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initCursor);
+    document.addEventListener('astro:page-load', initCursor);
+</script>
