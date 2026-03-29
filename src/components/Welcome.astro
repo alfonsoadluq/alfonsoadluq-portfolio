@@ -1,18 +1,28 @@
 ---
 const welcomeData = {
-    title: "Fullstack Developer",
     description: "Desarrollador FullStack Junior, con 1 año de experiencia en el desarrollo de aplicaciones web. Apasionado por la tecnología, la optimización y el desarrollo de software de alta calidad.",
 }
+
+const typeWritingData = {
+    word1 : "FullStack Developer",
+    word2 : "FrontEnd Enjoyer",
+    word3 : "BackEnd Enthusiast",
+    word4 : "Software Architect Aspirant",
+    word5 : "Cofee Lover",
+}
 ---
-<section class="mt-[5rem] px-[150px]">
+<section class="max-w-6xl mx-auto px-4 py-20">
     <div class=" grid grid-cols-2 justify-center items-start">
         <div>   
             <h2 class="text-cyan inline-block font-bold tracking-[0.25rem] mb-4 border border-cyan/20 bg-cyan/5 px-3 py-2 rounded-full shadow-[0_0_15px_rgba(0,193,253,0.1)]">
-                &lt; {welcomeData.title} /&gt;
+                &lt; 
+                <span id="typewriter" data-words={JSON.stringify(Object.values(typeWritingData))}></span>
+                <span class="typewriter-cursor">|</span>
+                /&gt;
             </h2>
             <p class="text-text-muted">Bienvenido, soy</p>
             <h1 class="animate-gradient-text mb-[1rem]">Alfonso Adiego Luque</h1>
-            <p class="text-text-muted tracking-[0.15rem] text-sm md:text-base max-w-2xl">
+            <p class="text-text-muted tracking-[0.15rem] max-w-2xl">
                 {welcomeData.description}
             </p>
             <div class="flex gap-4">
@@ -28,7 +38,7 @@ const welcomeData = {
                     Contáctame
                     </span>
                 </a>
-                <a href="mailto:alfonsoaldev@gmail.com" class="mt-[1rem] group relative flex items-center justify-start w-10 h-10 btn-cyber text-white rounded-[25px] transition-all duration-500 ease-in-out overflow-hidden hover:w-33 active:scale-95 p-2">
+                <a href="https://www.linkedin.com/in/alfonso-adiego-luque/" class="mt-[1rem] group relative flex items-center justify-start w-10 h-10 btn-cyber text-white rounded-[25px] transition-all duration-500 ease-in-out overflow-hidden hover:w-33 active:scale-95 p-2">
                     <div class="flex items-center justify-center min-w-[24px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-brand-linkedin"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1" /></svg>
                     </div>
@@ -40,3 +50,68 @@ const welcomeData = {
         </div>
     </div>
 </section>
+
+<script>
+    function initTypewriter() {
+        const target = document.getElementById('typewriter');
+        if (!target) return;
+
+        const words = JSON.parse(target.getAttribute('data-words') || '[]');
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeSpeed = 50;    // Velocidad al escribir
+        const deleteSpeed = 20;  // Velocidad al borrar
+        const pauseTime = 2500;  // Pausa para leer
+        const startPause = 500;  // Pausa antes de empezar una palabra nueva
+
+        let lastTime = 0;
+        let accumulatedTime = 0;
+
+        function animate(currentTime) {
+            if (!lastTime) lastTime = currentTime;
+            const deltaTime = currentTime - lastTime;
+            lastTime = currentTime;
+            accumulatedTime += deltaTime;
+
+            const currentWord = words[wordIndex];
+            
+            let currentInterval = isDeleting ? deleteSpeed : typeSpeed;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                currentInterval = pauseTime;
+            }
+
+            if (isDeleting && charIndex === 0) {
+                currentInterval = startPause;
+            }
+
+            if (accumulatedTime >= currentInterval) {
+                accumulatedTime = 0;
+
+                if (!isDeleting && charIndex === currentWord.length) {
+                    isDeleting = true;
+                } 
+                else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
+
+                if (isDeleting) {
+                    if (charIndex > 0) charIndex--;
+                } else {
+                    if (charIndex < currentWord.length) charIndex++;
+                }
+
+                target.textContent = currentWord.substring(0, charIndex);
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    initTypewriter();
+    document.addEventListener('astro:page-load', initTypewriter);
+</script>

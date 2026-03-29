@@ -1,0 +1,63 @@
+---
+interface Props {
+  title: string;
+  company: string;
+  description: string;
+  link?: string;
+  date: string;
+}
+
+const { title, company, description, link, date } = Astro.props;
+---
+
+<div class="relative mx-12 pb-12 grid before:absolute before:left-[-35px] before:block before:h-full before:border-l-2 before:border-white/10 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4 group">
+  
+  <!-- LÍNEA Y NODO (Visual Repetitivo) -->
+  <div class="relative pb-12 md:col-span-2">
+    <div class="sticky top-28">
+      <!-- El Nodo de Neón Cyan -->
+      <span class="absolute -left-[41px] top-1 w-3 h-3 rounded-full bg-cyan shadow-[0_0_15px_rgba(0,193,253,0.8)] border border-white/50 group-hover:scale-150 group-hover:shadow-[0_0_25px_rgba(0,193,253,1)] transition-all duration-500"></span>
+
+      <h3 class="text-xl font-bold text-cyan drop-shadow-[0_0_8px_rgba(0,193,253,0.4)]">{title}</h3>
+      <h4 class="font-semibold text-xl text-white/90">{company}</h4>
+      <time class="text-sm font-mono text-purple/80 uppercase tracking-widest">{date}</time>
+    </div>
+  </div>
+
+  <!-- CONTENIDO Y BOTÓN -->
+  <div class="relative flex flex-col gap-4 pb-4 text-text-muted md:col-span-3">
+    <p class="text-base leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+      {description}
+    </p>
+
+    {link && (
+      <a 
+        href={link} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="btn-glass-neon w-fit px-5 py-2 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-2 group/link active:scale-90"
+      >
+        Saber más
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover/link:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 6l6 6l-6 6" />
+        </svg>
+      </a>
+    )}
+  </div>
+</div>
+
+<style>
+  /* Efecto de Rayo en la línea vertical al hacer hover */
+  div::before {
+    transition: all 0.5s ease;
+    background: linear-gradient(to bottom, var(--color-cyan) 0%, var(--color-purple) 100%);
+    opacity: 0.1;
+    width: 2px;
+    border-left: none;
+  }
+
+  div:hover::before {
+    opacity: 0.6;
+    box-shadow: 0 0 15px var(--color-cyan-glow);
+  }
+</style>
