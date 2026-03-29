@@ -14,19 +14,16 @@ import Footer from '../components/Footer.astro';
 		<meta name="generator" content={Astro.generator} />
 		<Seo title="Portfolio de Alfonso Adiego Luque - Desarrollador FullStack Junior" description="Soy Alfonso Adiego Luque, desarrollador FullStack Junior. Explora mis proyectos y descubre cómo puedo ayudarte a desarrollar tus ideas." />
 		<script is:inline>
-			const getTheme = () => {
+			const theme = (() => {
 				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
+				return localStorage.getItem('theme');
 				}
-				return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-			};
-
-			const theme = getTheme();
-			if (theme === 'light') {
-				document.documentElement.setAttribute('data-theme', 'light');
-			} else {
-				document.documentElement.setAttribute('data-theme', 'dark');
-			}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				return 'dark';
+				}
+				return 'light';
+			})();
+			document.documentElement.setAttribute('data-theme', theme);
 		</script>
 	</head>
 	<body>

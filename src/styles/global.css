@@ -1,29 +1,30 @@
 @import "tailwindcss";
 
+/* Custom variant for data-theme="dark" */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
-    /* --- BREAKPOINTS --- */
     --breakpoint-xlm: 87.5rem;
     --breakpoint-3xl: 120rem;
     --breakpoint-4xl: 160rem;
 
-    /* --- PALETA DE COLORES (EXTRAÍDA DE TU BANNER) --- */
-    --cian: #00C1FD;
-    --azul: #2563EB;
-    --purpura: #8B5CF6;
-    --fondo-top: #050b18;    /* Azul marino abisal */
-    --fondo-bottom: #020617; /* Negro azulado profundo */
-    --texto-muted: #94A3B8;
+    --cyan: #00C1FD;
+    --blue: #2563EB;
+    --purple: #8B5CF6;
+    --bg-top: #050b18;
+    --bg-bottom: #020617;
+    --text-muted: #94A3B8;
 
     --color-site-bg: light-dark(#ffffff, #030712);
     --color-dot: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.15));
 
-    --degradado-nombre: linear-gradient(
+    --name-gradient: linear-gradient(
         to right, 
-        var(--cian), 
-        var(--azul), 
-        var(--purpura), 
-        var(--azul), 
-        var(--cian)
+        var(--cyan), 
+        var(--blue), 
+        var(--purple), 
+        var(--blue), 
+        var(--cyan)
     );
 }
 
@@ -45,10 +46,11 @@
     }
 
     body {
-        @apply transition-colors duration-500;
         background-color: var(--color-site-bg);
         color: var(--color-site-text);
         min-height: 100vh;
+        /* Smooth transition for background and text colors */
+        transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s ease;
     }
 }
 
@@ -58,7 +60,7 @@
         padding-bottom: 0.15em;
         padding-right: 0.05em;
         line-height: 1.1;
-        background-image: var(--degradado-nombre);
+        background-image: var(--name-gradient);
         background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -83,8 +85,8 @@
         height: 200%;
         background: conic-gradient(
             transparent, 
-            var(--cian), 
-            var(--purpura), 
+            var(--cyan), 
+            var(--purple), 
             transparent 30%
         );
         animation: rotate 4s linear infinite;
@@ -92,14 +94,14 @@
 
     .card-content {
         position: relative;
-        background: var(--fondo-bottom);
+        background: var(--bg-bottom);
         border-radius: 1rem;
         height: 100%;
         width: 100%;
         z-index: 1;
     }
 
-    .aura-cyan {
+    .cyan-aura {
         position: fixed; 
         top: -5%; 
         left: -5%; 
@@ -118,7 +120,7 @@
             to right,
             transparent,
             rgba(0, 193, 253, 0.1),
-            var(--cian),
+            var(--cyan),
             rgba(139, 92, 246, 0.1),
             transparent
         );

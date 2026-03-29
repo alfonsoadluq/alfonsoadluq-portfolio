@@ -1,0 +1,28 @@
+---
+import { Images } from "@assets/images";
+import { Picture } from "astro:assets";
+
+const navData = [
+    { name: "Home", href: "/#" },
+    { name: "Projects", href: "/#projects" },
+    { name: "About", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
+]
+---
+<header>
+    <nav>
+        <Picture
+        src={Images.logos.logoAlfonso}
+        alt="Logo de Alfonso Adiego Luque"
+        width={100}
+        height={60}
+        widths={[120,160,197,246,320,492]}
+        sizes="(max-width: 768px) 105px, 197px"
+        formats={["avif","webp"]}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="w-[105px] md:w-[200px] h-auto object-contain"
+        />
+    </nav>
+</header>
