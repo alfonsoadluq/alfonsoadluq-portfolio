@@ -237,6 +237,39 @@
         text-shadow: 0 0 8px var(--color-cyan);
     }
 
+    .holographic-card::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        /* Gradiente con tu color Cyan */
+        background: linear-gradient(
+            0deg, 
+            transparent, 
+            transparent 40%, 
+            rgba(0, 193, 253, 0.3)
+        );
+        /* Hacemos que empiece arriba a la izquierda para cruzar toda la imagen */
+        transform: rotate(-45deg) translateY(-100%);
+        transition: all 0.6s ease-in-out;
+        opacity: 0;
+        z-index: 10;
+        pointer-events: none; /* IMPORTANTE: Para no bloquear clics */
+    }
+
+    /* Al hacer hover en el contenedor padre (.group), activamos el holograma */
+    .group:hover .holographic-card::after {
+        opacity: 1;
+        transform: rotate(-45deg) translateY(100%);
+    }
+
+    /* Sombra Cyan al hacer hover (reemplaza al scale) */
+    .group:hover .holographic-card {
+        box-shadow: 0 0 25px rgba(0, 193, 253, 0.4);
+    }
+
 /* ==========================================================================
 4. ANIMACIONES (Keyframes)
 ========================================================================== */
@@ -306,10 +339,10 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0; }
     }
-}
-
-@media (min-width: 1024px) {
+    
+    @media (min-width: 1024px) {
         .cursor {
             display: block;
         }
     }
+}
