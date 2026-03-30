@@ -19,35 +19,34 @@ const navData =[
 
 <header class="fixed top-0 left-0 w-full flex justify-center items-start z-[100] pt-6 pointer-events-none">
     
+    <!-- NAVEGACIÓN -->
+    <!-- Inicialmente usamos max-w-[700px] para que en PC esté igual de recogido que en móvil -->
     <nav 
         id="main-nav" 
-        class="relative pointer-events-auto flex items-center justify-between w-full transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] border rounded-full will-change-[max-width,padding,background-color] origin-center
-        max-w-[960px] px-7 md:px-[60px] py-4 bg-transparent border-transparent overflow-hidden">
-        <div id="secret-trigger" class="absolute left-0 top-0 w-12 md:w-16 h-full cursor-pointer z-50 rounded-l-full hidden md:block"></div>
-
-        <!-- COLUMNA IZQUIERDA -->
-        <div class="flex-1 flex justify-start items-center">
-            <div id="logo-box" class="flex items-center justify-start transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden w-[60px] md:w-[70px] opacity-0">
-                <button id="easterEggButton" class="relative cursor-pointer transition-transform active:scale-95 select-none outline-none pr-4">
-                    <Picture
-                        id="logo-image"
-                        {...imageData}
-                        width={100}
-                        height={80}
-                        widths={[100, 120, 160, 200]}
-                        sizes="(max-width: 768px) 105px, 100px"
-                        formats={["avif", "webp"]}
-                        loading="eager"
-                        fetchpriority="high"
-                        decoding="async"
-                        class="w-[60px] md:w-[50px] h-auto object-contain will-change-[transform,filter]"
-                    />
-                </button>
-            </div>
+        class="relative pointer-events-auto flex items-center justify-center w-full transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] border rounded-full will-change-[max-width,background-color] origin-center
+        max-w-[700px] h-[72px] bg-transparent border-transparent overflow-hidden"
+    >
+        <!-- LOGO -->
+        <div id="logo-box" class="absolute left-6 flex items-center transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] z-20">
+            <a href="/" class="relative cursor-pointer transition-transform active:scale-95 select-none outline-none">
+                <Picture
+                    id="logo-image"
+                    {...imageData}
+                    width={100}
+                    height={80}
+                    widths={[100, 120, 160, 200]}
+                    sizes="(max-width: 768px) 105px, 100px"
+                    formats={["avif", "webp"]}
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
+                    class="w-[60px] md:w-[50px] h-auto object-contain transition-transform duration-[600ms]"
+                />
+            </a>
         </div>
 
-        <!-- COLUMNA CENTRAL (Reducido el gap de 8 a 6 para que estén más juntos) -->
-        <ul class="hidden md:flex items-center justify-center gap-4 md:gap-6 flex-shrink-0">
+        <!-- ENLACES -->
+        <ul class="hidden md:flex items-center justify-center gap-8 z-10">
             {navData.map((item) => (
                 <li class="text-sm font-medium text-text-muted transition-colors duration-300">
                     <a href={item.href} class="hover:text-cyan whitespace-nowrap">{item.name}</a>
@@ -55,12 +54,11 @@ const navData =[
             ))}
         </ul>
 
-        <!-- COLUMNA DERECHA -->
-        <div class="flex-1 flex justify-end items-center gap-4">
+        <!-- BOTÓN TEMA -->
+        <div id="theme-box" class="absolute right-6 flex items-center gap-4 transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] z-20">
             <div class="hidden md:block">
                 <ThemeButton />
             </div>
-            
             <button id="mobile-menu-btn" class="md:hidden p-2 text-text-muted hover:text-cyan transition-colors" aria-label="Abrir menú">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -76,24 +74,18 @@ const navData =[
     <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] opacity-0 pointer-events-none transition-opacity duration-300"></div>
 
     <!-- PANEL LATERAL MÓVIL -->
-    <aside id="mobile-sidebar" class="fixed top-0 right-0 h-screen w-[280px] bg-white dark:bg-[#050b18] border-l border-gray-200 dark:border-white/10 z-[200] transform translate-x-full transition-[transform,background-color] duration-[500ms] ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col px-8 py-8 shadow-2xl pointer-events-auto">
+    <aside id="mobile-sidebar" class="fixed top-0 right-0 h-screen w-[280px] bg-white dark:bg-[#050b18] border-l border-white/10 z-[200] transform translate-x-full transition-[transform,background-color] duration-[500ms] ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col px-8 py-8 shadow-2xl pointer-events-auto">
         
         <div class="flex justify-between items-center mb-12 min-h-[40px]">
-            <button id="mobile-easterEggButton" class="relative opacity-0 cursor-pointer transition-transform active:scale-95 select-none outline-none">
+            <a href="/" class="outline-none">
                 <Picture
-                    id="mobile-logo-image"
                     {...imageData}
                     width={100}
                     height={80}
-                    widths={[100, 120, 160, 200]}
-                    sizes="(max-width: 768px) 105px, 100px"
                     formats={["avif", "webp"]}
-                    loading="eager"
-                    fetchpriority="high"
-                    decoding="async"
-                    class="w-[45px] h-auto object-contain will-change-[transform,filter]"
+                    class="w-[45px] h-auto object-contain"
                 />
-            </button>
+            </a>
 
             <button id="close-menu-btn" class="p-2 text-slate-500 dark:text-text-muted hover:text-cyan transition-transform active:scale-90" aria-label="Cerrar menú">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -104,14 +96,14 @@ const navData =[
             </button>
         </div>
 
-        <ul class="flex flex-col gap-6 w-full">
+        <ul class="flex flex-col gap-6 w-full px-2">
             {navData.map((item, index) => (
                 <li class="flex items-center justify-between w-full min-h-[48px]">
                     <a href={item.href} class="mobile-link text-2xl font-bold text-slate-800 dark:text-white/90 hover:text-cyan transition-colors leading-none block">
                         {item.name}
                     </a>
                     {index === 0 && (
-                        <div class="flex items-center justify-center translate-y-[2px] pr-1">
+                        <div class="pr-1">
                             <ThemeButton />
                         </div>
                     )}
@@ -126,50 +118,44 @@ const navData =[
         const nav = document.getElementById('main-nav');
         const logoBox = document.getElementById('logo-box');
         const logoImage = document.getElementById('logo-image');
-        const easterEggButton = document.getElementById('easterEggButton');
-        const secretTrigger = document.getElementById('secret-trigger');
+        const themeBox = document.getElementById('theme-box');
 
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const closeMenuBtn = document.getElementById('close-menu-btn');
         const mobileSidebar = document.getElementById('mobile-sidebar');
         const mobileBackdrop = document.getElementById('mobile-backdrop');
         const mobileLinks = document.querySelectorAll('.mobile-link');
-        const mobileEasterEggButton = document.getElementById('mobile-easterEggButton');
-        const mobileLogoImage = document.getElementById('mobile-logo-image');
 
-        if (!nav || !logoBox) return;
+        if (!nav || !logoBox || !themeBox) return;
 
-        // --- 1. LÓGICA SCROLL (ANCHOS MÁS COMPACTOS) ---
-        // Reducido de 1440 a 960 para que arriba no estén tan separados
-        const topClasses =['max-w-[960px]', 'md:px-[60px]', 'py-4', 'bg-transparent', 'border-transparent'];
-        const pillClasses =['md:px-8', 'px-6', 'py-2', 'bg-white/10', 'dark:bg-[#030712]/60', 'backdrop-blur-xl', 'border-gray-200/20', 'dark:border-white/10', 'shadow-2xl'];
+        // Anchos unificados (PC = Móvil)
+        const topClasses = ['bg-transparent', 'border-transparent', 'h-[72px]'];
+        const pillClasses =['bg-white/10', 'dark:bg-[#030712]/60', 'backdrop-blur-xl', 'border-gray-200/20', 'dark:border-white/10', 'shadow-2xl', 'h-[56px]'];
 
         let isScrolled = window.scrollY > 20;
 
         const updateUI = () => {
             requestAnimationFrame(() => {
                 if (!isScrolled) {
-                    // MODO ARRIBA
-                    nav.classList.remove(...pillClasses, 'max-w-[520px]', 'max-w-[620px]');
-                    nav.classList.add(...topClasses);
+                    // --- MODO ARRIBA ---
+                    // 1. Añadimos duración súper lenta (1200ms) al recuperar el estado inicial
+                    nav.classList.remove('duration-[600ms]');
+                    nav.classList.add('duration-[1200ms]');
                     
-                    logoBox.className = `flex items-center justify-start transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden w-[60px] md:w-[70px] ${isActive ? 'opacity-100' : 'opacity-0'}`;
+                    nav.classList.remove(...pillClasses, 'max-w-[680px]');
+                    nav.classList.add(...topClasses, 'max-w-[700px]');
+                    
+                    logoImage?.classList.remove('scale-[0.85]');
                 } else {
-                    // MODO PASTILLA
-                    nav.classList.remove(...topClasses);
-                    nav.classList.add(...pillClasses);
+                    // --- MODO CÁPSULA (SCROLL) ---
+                    // 2. Volvemos a la velocidad normal (600ms) para encoger la barra
+                    nav.classList.remove('duration-[1200ms]');
+                    nav.classList.add('duration-[600ms]');
 
-                    if (isActive) {
-                        // Pastilla abierta (Ancho máximo súper compacto de 620px en vez de 780px)
-                        nav.classList.remove('max-w-[520px]');
-                        nav.classList.add('max-w-[620px]'); 
-                        logoBox.className = "flex items-center justify-start transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-visible w-[50px] md:w-[60px] opacity-100 mr-2";
-                    } else {
-                        // Pastilla cerrada (Ancho miniatura de 520px)
-                        nav.classList.remove('max-w-[620px]');
-                        nav.classList.add('max-w-[620px]'); 
-                        logoBox.className = "flex items-center justify-start transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden w-0 opacity-0 mr-0";
-                    }
+                    nav.classList.remove(...topClasses, 'max-w-[700px]');
+                    nav.classList.add(...pillClasses, 'max-w-[680px]');
+
+                    logoImage?.classList.add('scale-[0.85]');
                 }
             });
         };
@@ -181,77 +167,25 @@ const navData =[
                 updateUI();
             }
         });
-        updateUI(); // Disparo inicial
 
-        // --- 2. LÓGICA MENÚ MÓVIL ---
-        const openMenu = () => {
+        // --- MENÚ MÓVIL ---
+        mobileMenuBtn?.addEventListener('click', () => {
             mobileSidebar?.classList.remove('translate-x-full');
-            mobileBackdrop?.classList.remove('opacity-0', 'pointer-events-none');
             mobileBackdrop?.classList.add('opacity-100', 'pointer-events-auto');
-        };
+            mobileBackdrop?.classList.remove('opacity-0', 'pointer-events-none');
+        });
 
         const closeMenu = () => {
             mobileSidebar?.classList.add('translate-x-full');
-            mobileBackdrop?.classList.remove('opacity-100', 'pointer-events-auto');
             mobileBackdrop?.classList.add('opacity-0', 'pointer-events-none');
+            mobileBackdrop?.classList.remove('opacity-100', 'pointer-events-auto');
         };
 
-        mobileMenuBtn?.addEventListener('click', openMenu);
         closeMenuBtn?.addEventListener('click', closeMenu);
         mobileBackdrop?.addEventListener('click', closeMenu);
         mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 
-
-        // --- 3. LÓGICA EASTER EGG ---
-        if (easterEggButton?.hasAttribute('data-init')) return;
-        easterEggButton?.setAttribute('data-init', 'true');
-
-        let clickCount = 5;
-        let isActive = false;
-        let canRedirect = false;
-
-        const handleSecretClick = (e) => {
-            e.preventDefault();
-            
-            if (isActive && !canRedirect) return; 
-
-            if (isActive && canRedirect) {
-                logoImage?.classList.add('scale-90', 'opacity-0');
-                mobileLogoImage?.classList.add('scale-90', 'opacity-0');
-                setTimeout(() => { window.location.href = "https://www.google.com/"; }, 100); 
-                return;
-            }
-
-            if (!isActive) clickCount--;
-
-            if (clickCount === 0 && !isActive) {
-                isActive = true;
-                canRedirect = false; 
-                if(secretTrigger) secretTrigger.style.display = 'none';
-
-                requestAnimationFrame(() => {
-                    updateUI(); 
-                    
-                    easterEggButton?.classList.remove('opacity-0');
-                    easterEggButton?.classList.add('opacity-100');
-                    logoImage?.classList.add('slide-in-blurred-top'); 
-
-                    if (mobileEasterEggButton && mobileLogoImage) {
-                        mobileEasterEggButton.classList.remove('opacity-0');
-                        mobileEasterEggButton.classList.add('opacity-100');
-                    }
-                    
-                    setTimeout(() => {
-                        logoImage?.classList.add('slide-in-blurred-top'); 
-                        canRedirect = true; 
-                    }, 1000);
-                });
-            }
-        };
-
-        secretTrigger?.addEventListener('click', handleSecretClick);
-        easterEggButton?.addEventListener('click', handleSecretClick);
-        mobileEasterEggButton?.addEventListener('click', handleSecretClick);
+        updateUI();
     }
 
     initHeader();
