@@ -87,6 +87,7 @@
         scale: var(--cursor-scale, 1);
         transition: opacity 0.5s ease, scale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: translate, scale;
+        display: none;
     }
 
     [data-theme="light"] .cursor {
@@ -307,3 +308,8 @@
     }
 }
 
+@media (min-width: 1024px) {
+        .cursor {
+            display: block;
+        }
+    }
