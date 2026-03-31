@@ -80,40 +80,6 @@ const typeWritingData = {
     </div>
 </section>
 
-<script>
-    function initTypewriter() {
-        const target = document.getElementById('typewriter');
-        if (!target) return;
-        const words = JSON.parse(target.getAttribute('data-words') || '[]');
-        let wordIndex = 0, charIndex = 0, isDeleting = false, lastTime = 0, accumulatedTime = 0;
-        const typeSpeed = 60, deleteSpeed = 30, pauseTime = 2500, startPause = 500;
-
-        function animate(currentTime) {
-            if (!lastTime) lastTime = currentTime;
-            const deltaTime = currentTime - lastTime;
-            lastTime = currentTime;
-            accumulatedTime += deltaTime;
-            const currentWord = words[wordIndex];
-            let currentInterval = isDeleting ? deleteSpeed : typeSpeed;
-            if (!isDeleting && charIndex === currentWord.length) currentInterval = pauseTime;
-            if (isDeleting && charIndex === 0) currentInterval = startPause;
-
-            if (accumulatedTime >= currentInterval) {
-                accumulatedTime = 0;
-                if (!isDeleting && charIndex === currentWord.length) isDeleting = true;
-                else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; }
-                isDeleting ? charIndex-- : charIndex++;
-                target.textContent = currentWord.substring(0, charIndex);
-            }
-            requestAnimationFrame(animate);
-        }
-        requestAnimationFrame(animate);
-    }
-
-    initTypewriter();
-    document.addEventListener('astro:page-load', () => { initTypewriter(); });
-</script>
-
 <style>
     .perspective-container {
         perspective: 1000px;

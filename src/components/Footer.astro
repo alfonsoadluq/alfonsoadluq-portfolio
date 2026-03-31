@@ -8,53 +8,65 @@ const currentYear = new Date().getFullYear();
 const buttonData = [
     {
         label: "Email",
-        href: "mailto:alfonsoaldev@gmail.com"
+        href: "mailto:alfonsoaldev@gmail.com",
+        title: "Correo electrónico",
+        "ariaLabel": "Correo electrónico"
     },
     {
         label: "LinkedIn",
-        href: "https://www.linkedin.com/in/alfonso-adiego-luque/"
+        href: "https://www.linkedin.com/in/alfonso-adiego-luque/",
+        title: "LinkedIn",
+        "ariaLabel": "LinkedIn de Alfonso Adiego Luque"
     },
     {
         label: "GitHub",
-        href: "https://github.com/alfonsoadluq"
+        href: "https://github.com/alfonsoadluq",
+        title: "GitHub",
+        "ariaLabel": "GitHub de Alfonso Adiego Luque"
     },
     {
         label: "Currículum",
         href: cv,
-        fileName: "CV_Alfonso.pdf"
+        fileName: "CV_Alfonso.pdf",
+        title: "Currículum",
+        "ariaLabel": "Currículum de Alfonso Adiego Luque"
     }
 ]
 ---
 
 <footer class="w-full py-12 border-t border-slate-200 dark:border-white/5 transition-colors duration-500">
-    <!-- Contenedor alineado con el resto de tus secciones (max-w-6xl) -->
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         
-        <!-- IZQUIERDA: Logo + Copyright -->
+        <!-- Sección izquierda -->
         <div class="flex items-center gap-6">
-            <a href="#welcome" title={} class="hover:opacity-80 transition-opacity">
+            <a href="https://github.com/alfonsoadluq" target="_blank" title="GitHub" class="hover:opacity-80 transition-opacity">
                 <Picture
-                    src={Images.logos.logoAlfonso}
-                    alt="Logo Alfonso Adiego"
-                    width={40}
-                    height={32}
-                    formats={["avif", "webp"]}
-                    class="w-10 h-auto opacity-80"
+                src={Images.logos.logoAlfonso}
+                alt="Logo Alfonso Adiego"
+                width={120}
+                height={96}
+                widths={[40, 80, 120]}
+                sizes="(max-width: 768px) 40px, (max-width: 1024px) 80px, 120px"
+                formats={["avif", "webp"]}
+                loading="lazy"
+                fetchpriority="low"
+                decoding="async"
+                class="w-10 md:w-20 lg:w-30 h-auto opacity-80"
                 />
             </a>
             
-            <!-- Línea vertical divisoria como en la imagen -->
-            <div class="w-[1px] h-4 bg-slate-300 dark:bg-white/10"></div>
+            <!-- Línea vertical divisoria -->
+            <div class="w-px h-4 bg-slate-300 dark:bg-white/10"></div>
             
             <span class="text-sm font-medium text-slate-500 dark:text-text-muted/60 transition-colors duration-500">
                 &copy; {currentYear} Alfonso Adiego Luque
             </span>
         </div>
 
-        <!-- DERECHA: Iconos minimalistas (Estilo exacto a la imagen) -->
+        <!-- Sección derecha -->
         <div class="flex items-center gap-7">
             <!-- Email -->
-            <a href="mailto:alfonsoaldev@gmail.com" class="text-slate-400 hover:text-cyan transition-all duration-300 active:scale-90">
+            <a href={buttonData[0].href} target="_blank" title={buttonData[0].title} aria-label={buttonData[0].ariaLabel} class="text-slate-400 hover:text-cyan transition-all duration-300 active:scale-90">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
                     <path d="M3 7l9 6l9 -6"></path>
@@ -62,14 +74,14 @@ const buttonData = [
             </a>
 
             <!-- GitHub -->
-            <a href="https://github.com/alfonsoadluq" target="_blank" class="text-slate-400 hover:text-cyan transition-all duration-300 active:scale-90">
+            <a href={buttonData[2].href} target="_blank" title={buttonData[2].title} aria-label={buttonData[2].ariaLabel} class="text-slate-400 hover:text-cyan transition-all duration-300 active:scale-90">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path>
                 </svg>
             </a>
 
             <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/alfonso-adiego-luque/" target="_blank" class="text-slate-400 hover:text-cyan transition-all duration-300 active:scale-90">
+            <a href={buttonData[1].href} target="_blank" title={buttonData[1].title} aria-label={buttonData[1].ariaLabel} class="text-slate-400 hover:text-cyan transition-all duration-300 active:scale-90">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                     <rect width="4" height="12" x="2" y="9"></rect>
@@ -78,7 +90,7 @@ const buttonData = [
             </a>
 
             <!-- Currículum (Icono de documento) -->
-            <a href="/curriculum.pdf" target="_blank" class="text-slate-400 hover:text-cyan transition-all duration-300 active:scale-90">
+            <a href={buttonData[2].href} target="_blank" title={buttonData[2].title} aria-label={buttonData[2].ariaLabel} class="text-slate-400 hover:text-cyan transition-all duration-300 active:scale-90">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>

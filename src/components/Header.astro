@@ -9,11 +9,11 @@ const imageData = {
 };
 
 const navData =[
-    { name: "Inicio", href: "/#welcome" },
-    { name: "Experiencia", href: "/#experience" },
-    { name: "Proyectos", href: "/#projects" },
-    { name: "Sobre mí", href: "/#about" },
-    { name: "Contacto", href: "/#contact" },
+    { name: "Inicio", href: "/#welcome", title: "Ir al inicio", "ariaLabel": "Ir al inicio" },
+    { name: "Experiencia", href: "/#experience", title: "Ir a la experiencia", "ariaLabel": "Ir a la experiencia" },
+    { name: "Proyectos", href: "/#projects", title: "Ir a los proyectos", "ariaLabel": "Ir a los proyectos" },
+    { name: "Sobre mí", href: "/#about", title: "Ir a sobre mí", "ariaLabel": "Ir a sobre mí" },
+    { name: "Contacto", href: "/#contact", title: "Ir al contacto", "ariaLabel": "Ir al contacto" },
 ]
 ---
 
@@ -23,7 +23,7 @@ const navData =[
     <nav id="main-nav" class="relative pointer-events-auto flex items-center justify-center w-full transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] border rounded-full will-change-[max-width,background-color] origin-center max-w-175 h-18 bg-transparent border-transparent overflow-hidden">
 
         <div id="logo-box" class="absolute left-6 flex items-center transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] z-20">
-            <a href="/" class="relative cursor-pointer transition-transform active:scale-95 select-none outline-none">
+            <a href="/#welcome" class="relative cursor-pointer transition-transform active:scale-95 select-none outline-none">
                 <Picture
                     id="logo-image"
                     {...imageData}
@@ -43,12 +43,12 @@ const navData =[
         <ul class="hidden md:flex items-center justify-center gap-8 z-10">
             {navData.map((item) => (
                 <li class="text-sm font-medium text-text-muted transition-colors duration-300">
-                    <a href={item.href} class="hover:text-cyan whitespace-nowrap">{item.name}</a>
+                    <a href={item.href} title={item.title} aria-label={item.ariaLabel} class="hover:text-cyan whitespace-nowrap">{item.name}</a>
                 </li>
             ))}
         </ul>
 
-        <div id="theme-box" class="absolute right-6 flex items-center gap-4 transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] z-20">
+        <div id="theme-box" class="absolute right-6 flex items-center gap-4 transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] z-20">
             <div class="hidden md:block">
                 <ThemeButton />
             </div>
@@ -64,13 +64,13 @@ const navData =[
     </nav>
 
     <!-- Menú Móvil preparado -->
-    <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-md z-[150] opacity-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"></div>
+    <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-md z-150 opacity-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"></div>
 
     <!-- Panel de navegación en móvil -->
-    <aside id="mobile-sidebar" class="fixed top-0 right-0 h-screen w-[280px] bg-white dark:bg-[#050b18] border-l border-slate-200 dark:border-white/10 z-[200] flex flex-col px-8 py-8 shadow-2xl pointer-events-auto">
+    <aside id="mobile-sidebar" class="fixed top-0 right-0 h-screen w-70 bg-white dark:bg-[#050b18] border-l border-slate-200 dark:border-white/10 z-200 flex flex-col px-8 py-8 shadow-2xl pointer-events-auto">
         
-        <div class="mobile-anim flex justify-between items-center mb-12 min-h-[40px]" style="transition-delay: 100ms;">
-            <a href="/" class="outline-none">
+        <div class="mobile-anim flex justify-between items-center mb-12 min-h-10" style="transition-delay: 100ms;">
+            <a href="/" class="outline-none" aria-label="Logo de Alfonso Adiego Luque">
                 <Picture
                 {...imageData}
                 width={200}
@@ -81,7 +81,7 @@ const navData =[
                 loading="eager"
                 fetchpriority="high"
                 decoding="async"
-                class="w-[45px] md:w-[90px] lg:w-[200px] h-auto object-contain drop-shadow-[0_0_8px_rgba(0,193,253,0.3)]"
+                class="w-11.25 md:w-22.5 lg:w-50 h-auto object-contain drop-shadow-[0_0_8px_rgba(0,193,253,0.3)]"
                 />
             </a>
 
@@ -98,7 +98,7 @@ const navData =[
             {navData.map((item, index) => (
                 <li class="mobile-anim flex items-center justify-between w-full min-h-12"
                     style={`transition-delay: ${150 + index * 60}ms;`}>
-                    <a href={item.href} class="mobile-link text-2xl font-bold text-slate-800 dark:text-white/90 hover:text-cyan transition-colors leading-none block">
+                    <a href={item.href} title={item.title} aria-label={item.ariaLabel} class="mobile-link text-2xl font-bold text-slate-800 dark:text-white/90 hover:text-cyan transition-colors leading-none block">
                         {item.name}
                     </a>
                     {index === 0 && (

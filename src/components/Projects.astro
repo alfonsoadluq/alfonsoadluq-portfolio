@@ -54,7 +54,7 @@ const DISPLAY_PROJECTS = isCarousel ? [...PROJECTS, ...PROJECTS, ...PROJECTS] : 
             {DISPLAY_PROJECTS.map((project) => (
                 <div class:list={["shrink-0", isCarousel ? "w-[90vw] md:w-237.5 snap-center" : "w-full max-w-6xl"]}>
                     
-                    <article class="project-card cursor-pointer md:cursor-default flex flex-col space-x-0 space-y-6 md:space-y-0 group/card md:flex-row md:space-x-12 items-center bg-slate-50/80 dark:bg-[#050b18]/60 p-6 md:p-12 rounded-[3rem] border border-slate-200 dark:border-white/5 backdrop-blur-sm shadow-2xl h-full transition-colors duration-500">
+                    <article class="project-card cursor-pointer md:cursor-default flex flex-col space-x-0 space-y-6 md:space-y-0 group/card md:flex-row md:space-x-12 items-center bg-slate-50/80 dark:bg-[#050b18]/60 p-6 rounded-[3rem] border border-slate-200 dark:border-white/5 backdrop-blur-sm shadow-2xl h-full transition-colors duration-500">
                         
                         <div class="w-full md:w-1/2">
                             <div class="card-border-glow rounded-4xl transition-all duration-500">
@@ -186,45 +186,3 @@ const DISPLAY_PROJECTS = isCarousel ? [...PROJECTS, ...PROJECTS, ...PROJECTS] : 
         transform: rotate(180deg);
     }
 </style>
-
-<script>
-    const initProjects = () => {
-        const track = document.getElementById('carousel-track');
-        const nextBtn = document.getElementById('nextBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        
-        if (track && nextBtn && prevBtn) {
-            const getItemWidth = () => track.firstElementChild.clientWidth + 32;
-            const move = (direction) => { track.scrollBy({ left: direction * getItemWidth(), behavior: 'smooth' }); };
-            
-            nextBtn.addEventListener('click', () => move(1));
-            prevBtn.addEventListener('click', () => move(-1));
-            
-            track.addEventListener('scroll', () => {
-                const itemWidth = getItemWidth();
-                const totalWidth = track.scrollWidth;
-                const viewWidth = track.clientWidth;
-                if (track.scrollLeft + viewWidth >= totalWidth - 10) {
-                    track.scrollTo({ left: track.scrollLeft - (totalWidth / 3), behavior: 'instant' });
-                } else if (track.scrollLeft <= 10) {
-                    track.scrollTo({ left: track.scrollLeft + (totalWidth / 3), behavior: 'instant' });
-                }
-            });
-            requestAnimationFrame(() => { track.scrollLeft = track.scrollWidth / 3; });
-        }
-
-        const cards = document.querySelectorAll('.project-card');
-        cards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (window.innerWidth >= 768) return;
-
-                if (e.target.closest('a') || e.target.closest('button')) return;
-
-                card.classList.toggle('is-expanded');
-            });
-        });
-    }
-
-    initProjects();
-    document.addEventListener('astro:page-load', initProjects);
-</script>
