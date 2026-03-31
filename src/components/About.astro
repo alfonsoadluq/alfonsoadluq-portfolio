@@ -139,19 +139,3 @@ const STACK_CATEGORIES = [
         color: var(--color-cyan);
     }
 </style>
-
-<script>
-    const initAboutAccordion = () => {
-        const items = document.querySelectorAll('.stack-accordion-item');
-        items.forEach(item => {
-            const trigger = item.querySelector('.accordion-trigger');
-            trigger?.addEventListener('click', () => {
-                items.forEach(i => { if(i !== item) i.classList.remove('is-active'); });
-                item.classList.toggle('is-active');
-
-            });
-        });
-    }
-    initAboutAccordion();
-    document.addEventListener('astro:page-load', initAboutAccordion);
-</script>
