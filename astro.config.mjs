@@ -19,6 +19,8 @@ export default defineConfig({
       alias: {
         "@assets": "/src/assets",
         "@img": "/src/assets/img",
+        "@icon": "/src/assets/icons",
+        "@project": "/src/assets/img/projects",
         "@components": "/src/components",
       },
     },
