@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://alfonsoadluq.com",
+  site: "https://alfonsoadluq-portfolio-alfonsoadluq.vercel.app/",
   integrations: [partytown(), sitemap()],
   prefetch: {
     prefetchAll: false,
