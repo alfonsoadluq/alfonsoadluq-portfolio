@@ -1,4 +1,5 @@
 import logoAlfonso from '@img/logo.png';
+import previewImage from '@img/preview.png';
 
 import GitHubIcon from '@icon/github_dark.svg';
 import TailWindIcon from '@icon/tailwindcss.svg';
@@ -29,6 +30,7 @@ import kitkeeperPreview from '@project/kitkeeper.png';
 export const Images = {
   logos: {
     logoAlfonso: logoAlfonso,
+    previewImage: previewImage,
   },
   icons: {
     GitHubIcon: GitHubIcon,
