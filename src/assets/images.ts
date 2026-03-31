@@ -2,7 +2,7 @@ import logoAlfonso from '@img/logo.png';
 
 import GitHubIcon from '@icon/github_dark.svg';
 import TailWindIcon from '@icon/tailwindcss.svg';
-import PhpIcon from '@icon/PHP.svg';
+import PhpIcon from '@icon/php.svg';
 import JsIcon from '@icon/javascript.svg';
 import CssIcon from '@icon/css.svg';
 import AstroIcon from '@icon/astro-icon-dark.svg';
