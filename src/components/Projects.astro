@@ -52,30 +52,38 @@ const DISPLAY_PROJECTS = isCarousel ? [...PROJECTS, ...PROJECTS, ...PROJECTS] : 
             ]}
         >
             {DISPLAY_PROJECTS.map((project) => (
-                <div class:list={["shrink-0", isCarousel ? "w-[90vw] md:w-[950px] snap-center" : "w-full max-w-6xl"]}>
+                <div class:list={["shrink-0", isCarousel ? "w-[90vw] md:w-237.5 snap-center" : "w-full max-w-6xl"]}>
                     
                     <article class="project-card cursor-pointer md:cursor-default flex flex-col space-x-0 space-y-6 md:space-y-0 group/card md:flex-row md:space-x-12 items-center bg-slate-50/80 dark:bg-[#050b18]/60 p-6 md:p-12 rounded-[3rem] border border-slate-200 dark:border-white/5 backdrop-blur-sm shadow-2xl h-full transition-colors duration-500">
                         
                         <div class="w-full md:w-1/2">
-                            <div class="card-border-glow rounded-[2rem] transition-all duration-500">
-                                <div class="card-content overflow-hidden rounded-[2rem] bg-white dark:bg-[#050b18] holographic-card relative aspect-video">
+                            <div class="card-border-glow rounded-4xl transition-all duration-500">
+                                <div class="card-content overflow-hidden rounded-4xl bg-white dark:bg-[#050b18] holographic-card relative aspect-video">
                                     <Picture
-                                        src={project.image}
-                                        alt={project.title}
-                                        formats={["avif", "webp"]}
-                                        widths={[400, 800]}
-                                        class="object-cover w-full h-full transition duration-700"
+                                    src={project.image}
+                                    alt={project.title}
+                                    width={800}
+                                    height={600}
+                                    widths={[400, 800, 1200]}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 800px"
+                                    formats={["avif", "webp"]}
+                                    loading="lazy"
+                                    fetchpriority="low"
+                                    decoding="async"
+                                    class="object-cover w-full h-full transition duration-700"
                                     />
                                 </div>
                             </div>
                         </div>
 
                         <div class="w-full md:w-1/2 flex flex-col relative">
+                        
                             <!-- Título y flecha -->
                             <div class="flex justify-between items-center mb-0 md:mb-4">
                                 <h3 class="text-2xl md:text-4xl font-black text-slate-900 dark:text-white drop-shadow-[0_0_10px_rgba(0,193,253,0.3)] uppercase tracking-tighter transition-colors duration-500">
                                     {project.title}
                                 </h3>
+
                                 <!-- Flecha solo visible en móvil -->
                                 <div class="md:hidden text-cyan chevron-icon transition-transform duration-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
@@ -181,7 +189,6 @@ const DISPLAY_PROJECTS = isCarousel ? [...PROJECTS, ...PROJECTS, ...PROJECTS] : 
 
 <script>
     const initProjects = () => {
-        // 1. LÓGICA DEL CARRUSEL (Intacta)
         const track = document.getElementById('carousel-track');
         const nextBtn = document.getElementById('nextBtn');
         const prevBtn = document.getElementById('prevBtn');
@@ -206,17 +213,13 @@ const DISPLAY_PROJECTS = isCarousel ? [...PROJECTS, ...PROJECTS, ...PROJECTS] : 
             requestAnimationFrame(() => { track.scrollLeft = track.scrollWidth / 3; });
         }
 
-        // 2. LÓGICA DE ACORDEÓN MÓVIL
         const cards = document.querySelectorAll('.project-card');
         cards.forEach(card => {
             card.addEventListener('click', (e) => {
-                // Solo ejecutamos el "plegado/desplegado" si estamos en móvil (< 768px)
                 if (window.innerWidth >= 768) return;
 
-                // Si el usuario hace click en un botón de GitHub o Live, no plegar la tarjeta
                 if (e.target.closest('a') || e.target.closest('button')) return;
 
-                // Alternar estado de la tarjeta clickeada
                 card.classList.toggle('is-expanded');
             });
         });

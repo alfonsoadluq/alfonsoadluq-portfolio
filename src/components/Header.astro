@@ -9,7 +9,7 @@ const imageData = {
 };
 
 const navData =[
-    { name: "Inicio", href: "/#" },
+    { name: "Inicio", href: "/#welcome" },
     { name: "Experiencia", href: "/#experience" },
     { name: "Proyectos", href: "/#projects" },
     { name: "Sobre mí", href: "/#about" },
@@ -17,17 +17,12 @@ const navData =[
 ]
 ---
 
-<header class="fixed top-0 left-0 w-full flex justify-center items-start z-[100] pt-6 pointer-events-none">
+<header class="fixed top-0 left-0 w-full flex justify-center items-start z-100 pt-6 pointer-events-none">
     
-    <!-- NAVEGACIÓN -->
-    <!-- Inicialmente usamos max-w-[700px] para que en PC esté igual de recogido que en móvil -->
-    <nav 
-        id="main-nav" 
-        class="relative pointer-events-auto flex items-center justify-center w-full transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] border rounded-full will-change-[max-width,background-color] origin-center
-        max-w-[700px] h-[72px] bg-transparent border-transparent overflow-hidden"
-    >
-        <!-- LOGO -->
-        <div id="logo-box" class="absolute left-6 flex items-center transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] z-20">
+    <!-- Menú de navegación PC -->
+    <nav id="main-nav" class="relative pointer-events-auto flex items-center justify-center w-full transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] border rounded-full will-change-[max-width,background-color] origin-center max-w-175 h-18 bg-transparent border-transparent overflow-hidden">
+
+        <div id="logo-box" class="absolute left-6 flex items-center transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] z-20">
             <a href="/" class="relative cursor-pointer transition-transform active:scale-95 select-none outline-none">
                 <Picture
                     id="logo-image"
@@ -40,12 +35,11 @@ const navData =[
                     loading="eager"
                     fetchpriority="high"
                     decoding="async"
-                    class="w-[60px] md:w-[50px] h-auto object-contain transition-transform duration-[600ms]"
+                    class="w-15 md:w-12.5 h-auto object-contain transition-transform duration-600"
                 />
             </a>
         </div>
 
-        <!-- ENLACES -->
         <ul class="hidden md:flex items-center justify-center gap-8 z-10">
             {navData.map((item) => (
                 <li class="text-sm font-medium text-text-muted transition-colors duration-300">
@@ -54,7 +48,6 @@ const navData =[
             ))}
         </ul>
 
-        <!-- BOTÓN TEMA -->
         <div id="theme-box" class="absolute right-6 flex items-center gap-4 transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] z-20">
             <div class="hidden md:block">
                 <ThemeButton />
@@ -70,24 +63,29 @@ const navData =[
         </div>
     </nav>
 
-    <!-- BACKDROP MÓVIL -->
-    <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    <!-- Menú Móvil preparado -->
+    <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-md z-[150] opacity-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"></div>
 
-    <!-- PANEL LATERAL MÓVIL -->
-    <aside id="mobile-sidebar" class="fixed top-0 right-0 h-screen w-[280px] bg-white dark:bg-[#050b18] border-l border-white/10 z-[200] transform translate-x-full transition-[transform,background-color] duration-[500ms] ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col px-8 py-8 shadow-2xl pointer-events-auto">
+    <!-- Panel de navegación en móvil -->
+    <aside id="mobile-sidebar" class="fixed top-0 right-0 h-screen w-[280px] bg-white dark:bg-[#050b18] border-l border-slate-200 dark:border-white/10 z-[200] flex flex-col px-8 py-8 shadow-2xl pointer-events-auto">
         
-        <div class="flex justify-between items-center mb-12 min-h-[40px]">
+        <div class="mobile-anim flex justify-between items-center mb-12 min-h-[40px]" style="transition-delay: 100ms;">
             <a href="/" class="outline-none">
                 <Picture
-                    {...imageData}
-                    width={100}
-                    height={80}
-                    formats={["avif", "webp"]}
-                    class="w-[45px] h-auto object-contain"
+                {...imageData}
+                width={200}
+                height={160}
+                widths={[100, 150, 200, 250]}
+                sizes="(max-width: 768px) 45px, (max-width: 1024px) 90px, 200px"
+                formats={["avif", "webp"]}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="w-[45px] md:w-[90px] lg:w-[200px] h-auto object-contain drop-shadow-[0_0_8px_rgba(0,193,253,0.3)]"
                 />
             </a>
 
-            <button id="close-menu-btn" class="p-2 text-slate-500 dark:text-text-muted hover:text-cyan transition-transform active:scale-90" aria-label="Cerrar menú">
+            <button id="close-menu-btn" class="p-2 dark:text-text-muted hover:text-cyan transition-transform active:scale-90" aria-label="Cerrar menú">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M18 6l-12 12" />
@@ -98,7 +96,8 @@ const navData =[
 
         <ul class="flex flex-col gap-6 w-full px-2">
             {navData.map((item, index) => (
-                <li class="flex items-center justify-between w-full min-h-[48px]">
+                <li class="mobile-anim flex items-center justify-between w-full min-h-12"
+                    style={`transition-delay: ${150 + index * 60}ms;`}>
                     <a href={item.href} class="mobile-link text-2xl font-bold text-slate-800 dark:text-white/90 hover:text-cyan transition-colors leading-none block">
                         {item.name}
                     </a>
@@ -113,23 +112,51 @@ const navData =[
     </aside>
 </header>
 
+<style>     
+    #mobile-sidebar {
+        transform: translateX(120%) skewX(-8deg);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.6s cubic-bezier(0.22, 1.2, 0.36, 1),
+                    opacity 0.4s ease,
+                    visibility 0.6s;
+        will-change: transform, opacity;
+    }
+
+    #mobile-sidebar.menu-open {
+        transform: translateX(0) skewX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mobile-anim {
+        opacity: 0;
+        transform: translateX(40px) scale(0.9);
+        filter: blur(10px);
+        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform, opacity, filter;
+    }
+
+    #mobile-sidebar.menu-open .mobile-anim {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        filter: blur(0);
+    }
+</style>
+
 <script>
     const initHeader = () => {
         const nav = document.getElementById('main-nav');
-        const logoBox = document.getElementById('logo-box');
         const logoImage = document.getElementById('logo-image');
-        const themeBox = document.getElementById('theme-box');
-
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const closeMenuBtn = document.getElementById('close-menu-btn');
         const mobileSidebar = document.getElementById('mobile-sidebar');
         const mobileBackdrop = document.getElementById('mobile-backdrop');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        if (!nav || !logoBox || !themeBox) return;
+        if (!nav) return;
 
-        // Anchos unificados (PC = Móvil)
-        const topClasses = ['bg-transparent', 'border-transparent', 'h-[72px]'];
+        const topClasses =['bg-transparent', 'border-transparent', 'h-[72px]'];
         const pillClasses =['bg-white/10', 'dark:bg-[#030712]/60', 'backdrop-blur-xl', 'border-gray-200/20', 'dark:border-white/10', 'shadow-2xl', 'h-[56px]'];
 
         let isScrolled = window.scrollY > 20;
@@ -137,24 +164,16 @@ const navData =[
         const updateUI = () => {
             requestAnimationFrame(() => {
                 if (!isScrolled) {
-                    // --- MODO ARRIBA ---
-                    // 1. Añadimos duración súper lenta (1200ms) al recuperar el estado inicial
-                    nav.classList.remove('duration-[600ms]');
-                    nav.classList.add('duration-[1200ms]');
-                    
+                    nav.classList.remove('duration-[250ms]');
+                    nav.classList.add('duration-[650ms]');
                     nav.classList.remove(...pillClasses, 'max-w-[680px]');
                     nav.classList.add(...topClasses, 'max-w-[700px]');
-                    
                     logoImage?.classList.remove('scale-[0.85]');
                 } else {
-                    // --- MODO CÁPSULA (SCROLL) ---
-                    // 2. Volvemos a la velocidad normal (600ms) para encoger la barra
-                    nav.classList.remove('duration-[1200ms]');
-                    nav.classList.add('duration-[600ms]');
-
+                    nav.classList.remove('duration-[650ms]');
+                    nav.classList.add('duration-[250ms]');
                     nav.classList.remove(...topClasses, 'max-w-[700px]');
                     nav.classList.add(...pillClasses, 'max-w-[680px]');
-
                     logoImage?.classList.add('scale-[0.85]');
                 }
             });
@@ -168,19 +187,21 @@ const navData =[
             }
         });
 
-        // --- MENÚ MÓVIL ---
-        mobileMenuBtn?.addEventListener('click', () => {
-            mobileSidebar?.classList.remove('translate-x-full');
+        const openMenu = () => {
+            mobileSidebar?.classList.add('menu-open');
             mobileBackdrop?.classList.add('opacity-100', 'pointer-events-auto');
             mobileBackdrop?.classList.remove('opacity-0', 'pointer-events-none');
-        });
-
-        const closeMenu = () => {
-            mobileSidebar?.classList.add('translate-x-full');
-            mobileBackdrop?.classList.add('opacity-0', 'pointer-events-none');
-            mobileBackdrop?.classList.remove('opacity-100', 'pointer-events-auto');
+            document.body.style.overflow = 'hidden';
         };
 
+        const closeMenu = () => {
+            mobileSidebar?.classList.remove('menu-open');
+            mobileBackdrop?.classList.add('opacity-0', 'pointer-events-none');
+            mobileBackdrop?.classList.remove('opacity-100', 'pointer-events-auto');
+            document.body.style.overflow = '';
+        };
+
+        mobileMenuBtn?.addEventListener('click', openMenu);
         closeMenuBtn?.addEventListener('click', closeMenu);
         mobileBackdrop?.addEventListener('click', closeMenu);
         mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
