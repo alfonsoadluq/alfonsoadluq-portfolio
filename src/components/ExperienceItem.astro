@@ -11,61 +11,90 @@ interface Props {
 const { title, company, location, date, details, skills } = Astro.props;
 ---
 
-<div class="relative pl-12 md:pl-20 group/item">
-  <!-- Línea y Nodos -->
+<div class="relative pl-12 md:pl-20 group/item experience-card cursor-pointer md:cursor-default">
+
   <div class="absolute -left-2.75 top-10 z-20">
     <div class="relative flex items-center justify-center">
       <div class="absolute w-8 h-8 bg-cyan/20 rounded-full blur-md group-hover/item:bg-cyan/40 transition-colors"></div>
-      <div class="relative w-5 h-5 rounded-full bg-slate-200 dark:bg-[#050b18] border-2 border-cyan shadow-[0_0_10px_rgba(0,193,253,0.3)]">
+      <div class="relative w-5 h-5 rounded-full bg-white dark:bg-[#050b18] border-2 border-cyan shadow-[0_0_10px_rgba(0,193,253,0.3)] dark:shadow-[0_0_10px_rgba(0,193,253,0.5)]">
         <div class="absolute inset-1 rounded-full bg-cyan shadow-[0_0_8px_#00C1FD]"></div>
       </div>
     </div>
   </div>
 
-  <!-- Tarjetas -->
+  <!-- Tarjeta -->
   <article class="card-border-glow transition-all duration-500 hover:-translate-y-1">
     <div class="card-content p-6 md:p-10 bg-white! dark:bg-[#050b18]! backdrop-blur-xl rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-500">
       
-      <div class="flex flex-col md:flex-row justify-between items-start gap-4 mb-8">
-        <div>
+      <div class="flex flex-col md:flex-row justify-between items-start gap-4">
+        <div class="pr-8">
           <h3 class="text-xl md:text-3xl font-bold text-slate-900 dark:text-white group-hover/item:text-cyan transition-colors duration-500 tracking-tighter">
             {title}
           </h3>
-          <p class="text-slate-500 dark:text-slate-400 font-bold text-sm md:text-base mt-1 italic transition-colors">
+          <p class="text-slate-500 dark:text-text-muted font-bold text-sm md:text-base mt-1 italic transition-colors">
             {company} <span class="mx-2 text-cyan/50">|</span> {location}
           </p>
         </div>
-        <span class="px-5 py-1.5 rounded-full bg-cyan/10 dark:bg-cyan/5 border border-cyan/30 dark:border-cyan/20 text-cyan text-[10px] md:text-xs font-black uppercase tracking-widest shadow-sm">
-          {date}
-        </span>
+
+        <div class="flex items-center gap-4 ml-auto md:ml-0">
+            <span class="px-5 py-1.5 rounded-full bg-cyan/10 dark:bg-cyan/5 border border-cyan/30 dark:border-cyan/20 text-cyan text-[10px] md:text-xs font-black uppercase tracking-widest shadow-sm">
+                {date}
+            </span>
+
+            <!-- Flecha solo móvil -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="chevron md:hidden transition-transform duration-500 text-cyan w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
       </div>
 
-      <ul class="space-y-4 mb-10">
-        {details.map((detail) => (
-          <li class="flex items-start gap-4 text-slate-700 dark:text-slate-300 text-sm md:text-base leading-relaxed transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m9 18 6-6-6-6"></path>
-            </svg>
-            <span>{detail}</span>
-          </li>
-        ))}
-      </ul>
+      <!-- Tarjeta desplegable -->
+      <div class="mobile-content-wrapper">
+        <div class="overflow-hidden">
+          <div class="pt-8">
+            <ul class="space-y-4 mb-10">
+                {details.map((detail) => (
+                  <li class="flex items-start gap-4 text-slate-700 dark:text-slate-300 text-sm md:text-base leading-relaxed transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+                    <span>{detail}</span>
+                  </li>
+                ))}
+            </ul>
 
-      <div class="flex flex-wrap gap-2">
-        {skills.map((skill) => (
-          <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-bold text-slate-600 dark:text-cyan/80 uppercase tracking-widest group-hover/item:border-cyan/40 transition-all shadow-sm dark:shadow-none">
-            {skill}
-          </span>
-        ))}
+            <div class="flex flex-wrap gap-2">
+                {skills.map((skill) => (
+                  <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-bold text-slate-600 dark:text-cyan/80 uppercase tracking-widest group-hover/item:border-cyan/40 transition-all shadow-sm dark:shadow-none">
+                    {skill}
+                  </span>
+                ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </article>
 </div>
 
 <style>
-    .card-content {
-        z-index: 1;
-        height: 100%;
-        width: 100%;
+    .card-content { z-index: 1; height: 100%; width: 100%; background: transparent !important; }
+
+    .mobile-content-wrapper {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+    }
+
+    @media (min-width: 768px) {
+        .mobile-content-wrapper {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+    }
+
+    .experience-card.is-expanded .mobile-content-wrapper {
+        grid-template-rows: 1fr;
+        opacity: 1;
+    }
+    .experience-card.is-expanded .chevron {
+        transform: rotate(180deg);
     }
 </style>
