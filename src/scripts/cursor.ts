@@ -3,7 +3,7 @@ export const initCursor = () => {
   if (!cursor || window.innerWidth < 1024) return;
 
   const handleMouseMove = (e: MouseEvent) => {
-    cursor.style.opacity = "1";
+    cursor.style.opacity = "0.8";
     cursor.style.setProperty("--x", `${e.clientX}px`);
     cursor.style.setProperty("--y", `${e.clientY}px`);
   };

@@ -7,16 +7,39 @@ export const initProjects = () => {
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const filter = btn.getAttribute("data-filter");
-
-      // Actualizar botones
       filterBtns.forEach((b) => {
-        b.classList.remove("bg-cyan", "text-white", "shadow-lg");
-        b.classList.add("text-slate-500", "dark:text-slate-400");
+        b.classList.remove(
+          "border-cyan",
+          "bg-cyan/10",
+          "text-cyan",
+          "shadow-lg",
+          "scale-105",
+        );
+        b.classList.add(
+          "border-slate-200",
+          "dark:border-white/5",
+          "bg-slate-50",
+          "dark:bg-[#050b18]/60",
+          "text-slate-500",
+          "dark:text-slate-400",
+        );
       });
-      btn.classList.add("bg-cyan", "text-white", "shadow-lg");
-      btn.classList.remove("text-slate-500", "dark:text-slate-400");
+      btn.classList.add(
+        "border-cyan",
+        "bg-cyan/10",
+        "text-cyan",
+        "shadow-lg",
+        "scale-105",
+      );
+      btn.classList.remove(
+        "border-slate-200",
+        "dark:border-white/5",
+        "bg-slate-50",
+        "dark:bg-[#050b18]/60",
+        "text-slate-500",
+        "dark:text-slate-400",
+      );
 
-      // Filtrar cards
       projectCards.forEach((card) => {
         const category = card.getAttribute("data-category");
         if (filter === "all" || category === filter) {
@@ -28,7 +51,6 @@ export const initProjects = () => {
     });
   });
 
-  // Acordeón móvil
   projectCards.forEach((card) => {
     (card as HTMLElement).onclick = (e: MouseEvent) => {
       if (window.innerWidth >= 768) return;

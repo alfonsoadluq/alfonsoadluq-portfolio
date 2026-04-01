@@ -5,6 +5,7 @@ import { initExperience } from "./experience.ts";
 import { initExperienceMobile } from "./experience.ts";
 import { initProjects } from "./projects.ts";
 import { initAbout } from "./about.ts";
+import { initTheme } from "./theme.ts";
 
 let isInitialized = false;
 
@@ -19,11 +20,11 @@ const initAll = () => {
   initExperienceMobile();
   initProjects();
   initAbout();
+  initTheme();
 
   isInitialized = true;
 };
 
-// Iniciar en carga inicial
 initAll();
 
 document.addEventListener("astro:page-load", initAll);
