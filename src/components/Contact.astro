@@ -29,7 +29,8 @@ const buttonData = [
         fileName: "CV_Alfonso.pdf",
         title: "Currículum",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 17h6" /><path d="M9 13h6" /></svg>`,
-        hoverWidth: "hover:w-[140px]"
+        hoverWidth: "hover:w-[140px]",
+        download: true
     }
 ];
 
@@ -54,12 +55,12 @@ const showForm = false;
             "flex flex-col gap-8 transition-all duration-500",
             !showForm ? "items-center max-w-3xl" : "items-start"
         ]}>
-            <p class="text-slate-600 dark:text-text-muted text-xl md:text-2xl leading-relaxed transition-colors duration-500">
+            <p class="text-muted text-xl md:text-2xl leading-relaxed transition-colors duration-500">
                 ¿Necesitas ayuda para construir tu proyecto, quieres colaborar en algo o estas interesado en mis habilidades? 
-                <strong class="text-slate-900 dark:text-white font-black">No dudes en contactarme.</strong>
+                <strong class="text-cyan font-black">No dudes en contactarme.</strong>
             </p>
             
-            <p class="text-slate-500 dark:text-text-muted/60 text-lg">
+            <p class="text-muted text-lg">
                 Puedes hacerlo a través de mis redes y correo personal:
             </p>
 
@@ -72,6 +73,7 @@ const showForm = false;
                     <a 
                         href={btn.href} 
                         target={btn.label !== 'Email' ? "_blank" : "_self"}
+                        download={btn.download}
                         class={`group relative flex items-center justify-start w-12 h-12 btn-cyber text-white rounded-full transition-all duration-500 overflow-hidden ${btn.hoverWidth} p-3 active:scale-95 shadow-lg`}
                     >
                         <div class="flex items-center justify-center min-w-[24px]">

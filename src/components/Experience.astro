@@ -32,7 +32,7 @@ const displayExperience = isHomePage ? EXPERIENCE.slice(0, 2) : EXPERIENCE;
 const showViewMore = isHomePage && EXPERIENCE.length > 2;
 ---
 
-<section id={Astro.props.id} class="py-24 max-w-6xl mx-auto px-6 overflow-visible">
+<section id={Astro.props.id} class="py-24 max-w-6xl flex flex-col items-center lg:items-start mx-auto px-6 overflow-visible">
   <h2 class="text-4xl font-black mb-24 flex items-center gap-4 text-slate-900 dark:text-white tracking-tighter transition-colors duration-500">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-cyan">
       <path d="M12 2a10 10 0 1 1 -10 10a10 10 0 0 1 10 -10zm-1 5v5l3 3l1 -1l-3 -3v-4h-1z"></path>
@@ -40,7 +40,7 @@ const showViewMore = isHomePage && EXPERIENCE.length > 2;
     Experiencia Profesional
   </h2>
 
-  <div class="relative ml-4 md:ml-12">
+  <div class="relative ml-4 lg:ml-12">
     <div class="absolute -left-px top-0 w-0.5 h-full bg-slate-200 dark:bg-white/10 transition-colors duration-500"></div>
     
     <div 

@@ -40,7 +40,7 @@ const navData =[
             </a>
         </div>
 
-        <ul class="hidden md:flex items-center justify-center gap-8 z-10">
+        <ul class="hidden lg:flex items-center justify-center gap-8 z-10">
             {navData.map((item) => (
                 <li class="text-sm font-medium text-text-muted transition-colors duration-300">
                     <a href={item.href} title={item.title} aria-label={item.ariaLabel} class="hover:text-cyan whitespace-nowrap">{item.name}</a>
@@ -49,10 +49,10 @@ const navData =[
         </ul>
 
         <div id="theme-box" class="absolute right-6 flex items-center gap-4 transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] z-20">
-            <div class="hidden md:block">
+            <div class="hidden lg:block">
                 <ThemeButton />
             </div>
-            <button id="mobile-menu-btn" class="md:hidden p-2 text-text-muted hover:text-cyan transition-colors" aria-label="Abrir menú">
+            <button id="mobile-menu-btn" class="lg:hidden p-2 text-text-muted hover:text-cyan transition-colors" aria-label="Abrir menú">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M4 6l16 0" />
@@ -81,7 +81,7 @@ const navData =[
                 loading="eager"
                 fetchpriority="high"
                 decoding="async"
-                class="w-11.25 md:w-22.5 lg:w-50 h-auto object-contain drop-shadow-[0_0_8px_rgba(0,193,253,0.3)]"
+                class="w-11.25 lg:w-50 h-auto object-contain drop-shadow-[0_0_8px_rgba(0,193,253,0.3)]"
                 />
             </a>
 
