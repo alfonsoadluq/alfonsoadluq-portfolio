@@ -1,24 +1,33 @@
 ---
 import { Images } from "@assets/images";
 
-const currentUrl = Astro.url.origin + Astro.url.pathname;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(Images.logos.previewImage.src, Astro.site);
 
 interface Props {
   title?: string;
   description?: string;
 }
 ---
+<title>{Astro.props.title}</title>
+<link rel="canonical" href={canonicalURL} />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="canonical" href={currentUrl} /> 
-<link rel="alternate" href={currentUrl} hreflang="es" />
+<link rel="alternate" href={canonicalURL} hreflang="es" />
+
 <meta name="description" content={Astro.props.description} />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="googlebot" content="index, follow" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={Astro.props.title} />
 <meta property="og:description" content={Astro.props.description} />
-<meta property="og:url" content={currentUrl} />
-<meta property="og:image" content={new URL(Images.logos.previewImage.src, Astro.site)} />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={Astro.props.title} />
-<meta name="twitter:description" content={Astro.props.description} />
-<meta name="twitter:image" content={new URL(Images.logos.previewImage.src, Astro.site)} />
-<meta name="robots" content="index, follow" />
-<title>{Astro.props.title}</title>
+<meta property="og:image" content={socialImageURL} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={Astro.props.title} />
+<meta property="twitter:description" content={Astro.props.description} />
+<meta property="twitter:image" content={socialImageURL} />
