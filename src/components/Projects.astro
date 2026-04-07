@@ -45,10 +45,74 @@ export const PROJECTS: Project[] = [
     demoLink: null, // Valores permitidos: url o null
     actionLinks: [] // Espacio para futuras acciones como "Ver caso de estudio", "Leer artículo", etc. Su uso es mediante un objeto: { label: "Texto del botón", href: "URL a la que apunta" }
   },
+  {
+    id: "kitkeeper refreshed",
+    category: "personal",
+    featured: false, 
+    inDevelopment: true,
+    overline: "Full Stack • Inventario IT • Laravel • PostgreSQL • 2FA",
+    title: "KitKeeper Refreshed",
+    description: "Nueva versión del KitKeeper original, enfocada en mejorar la experiencia de usuario y las capacidades del sistema administrativo.",
+    image: Images.projects.KitKeeperPreview,
+    accent: "#f97316",
+    features:["CONTROL DE PEDIDOS", "INFORMES DESCARGABLES", "AUTENTICACIÓN 2FA", "GESTIÓN DE USUARIOS"],
+    skills: ["React", "Laravel", "PostgreSQL", "Tailwind CSS", "Supabase"],
+    githubLink: "https://github.com/alfonsoadluq/kitkeeper-refreshed",
+    demoLink: null, // Valores permitidos: url o null
+    actionLinks: [] // Espacio para futuras acciones como "Ver caso de estudio", "Leer artículo", etc. Su uso es mediante un objeto: { label: "Texto del botón", href: "URL a la que apunta" }
+  },
+  {
+    id: "kitkeeper refreshed",
+    category: "personal",
+    featured: false, 
+    inDevelopment: true,
+    overline: "Full Stack • Inventario IT • Laravel • PostgreSQL • 2FA",
+    title: "KitKeeper Refreshed",
+    description: "Nueva versión del KitKeeper original, enfocada en mejorar la experiencia de usuario y las capacidades del sistema administrativo.",
+    image: Images.projects.KitKeeperPreview,
+    accent: "#f97316",
+    features:["CONTROL DE PEDIDOS", "INFORMES DESCARGABLES", "AUTENTICACIÓN 2FA", "GESTIÓN DE USUARIOS"],
+    skills: ["React", "Laravel", "PostgreSQL", "Tailwind CSS", "Supabase"],
+    githubLink: "https://github.com/alfonsoadluq/kitkeeper-refreshed",
+    demoLink: null, // Valores permitidos: url o null
+    actionLinks: [] // Espacio para futuras acciones como "Ver caso de estudio", "Leer artículo", etc. Su uso es mediante un objeto: { label: "Texto del botón", href: "URL a la que apunta" }
+  },
+  {
+    id: "kitkeeper refreshed",
+    category: "personal",
+    featured: false, 
+    inDevelopment: true,
+    overline: "Full Stack • Inventario IT • Laravel • PostgreSQL • 2FA",
+    title: "KitKeeper Refreshed",
+    description: "Nueva versión del KitKeeper original, enfocada en mejorar la experiencia de usuario y las capacidades del sistema administrativo.",
+    image: Images.projects.KitKeeperPreview,
+    accent: "#f97316",
+    features:["CONTROL DE PEDIDOS", "INFORMES DESCARGABLES", "AUTENTICACIÓN 2FA", "GESTIÓN DE USUARIOS"],
+    skills: ["React", "Laravel", "PostgreSQL", "Tailwind CSS", "Supabase"],
+    githubLink: "https://github.com/alfonsoadluq/kitkeeper-refreshed",
+    demoLink: null, // Valores permitidos: url o null
+    actionLinks: [] // Espacio para futuras acciones como "Ver caso de estudio", "Leer artículo", etc. Su uso es mediante un objeto: { label: "Texto del botón", href: "URL a la que apunta" }
+  },
+  {
+    id: "kitkeeper refreshed",
+    category: "personal",
+    featured: false, 
+    inDevelopment: true,
+    overline: "Full Stack • Inventario IT • Laravel • PostgreSQL • 2FA",
+    title: "KitKeeper Refreshed",
+    description: "Nueva versión del KitKeeper original, enfocada en mejorar la experiencia de usuario y las capacidades del sistema administrativo.",
+    image: Images.projects.KitKeeperPreview,
+    accent: "#f97316",
+    features:["CONTROL DE PEDIDOS", "INFORMES DESCARGABLES", "AUTENTICACIÓN 2FA", "GESTIÓN DE USUARIOS"],
+    skills: ["React", "Laravel", "PostgreSQL", "Tailwind CSS", "Supabase"],
+    githubLink: "https://github.com/alfonsoadluq/kitkeeper-refreshed",
+    demoLink: null, // Valores permitidos: url o null
+    actionLinks: [] // Espacio para futuras acciones como "Ver caso de estudio", "Leer artículo", etc. Su uso es mediante un objeto: { label: "Texto del botón", href: "URL a la que apunta" }
+  },
 ];
 
-const displayProjects = isFull ? PROJECTS : PROJECTS.slice(0, 4); // La cantidad de proyectos a mostrar
-const showViewMore = !isFull && PROJECTS.length > 4; // La cantidad de proyectos a partir de la cual se muestra el botón de "Ver todos los proyectos"
+const displayProjects = isFull ? PROJECTS : PROJECTS.slice(0, 3); 
+const showViewMore = !isFull && PROJECTS.length >= 3; // La cantidad de proyectos a partir de la cual se muestra el botón de "Ver todos los proyectos"
 ---
 
 <section id={Astro.props.id} class:list={["max-w-6xl mx-auto px-6 overflow-visible transition-all", isFull ? "pb-24 pt-0" : "py-24" ]}>
@@ -75,12 +139,12 @@ const showViewMore = !isFull && PROJECTS.length > 4; // La cantidad de proyectos
             <div class="w-4.5 h-4.5 transition-transform group-hover:scale-110 pointer-events-none">
                 <Fragment set:html={filter.icon} />
             </div>
-            <span class="font-black uppercase text-[10px] tracking-[0.1em] whitespace-nowrap pointer-events-none">
+            <span class="font-black uppercase text-[10px] tracking-widest whitespace-nowrap pointer-events-none">
                 {filter.title}
             </span>
             
             {/* Efecto de brillo solo para el activo */}
-            <div class="active-glow absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 pointer-events-none transition-opacity duration-500"></div>
+            <div class="active-glow absolute inset-0 bg-linear-to-tr from-white/20 to-transparent opacity-0 pointer-events-none transition-opacity duration-500"></div>
             </button>
         ))}
         </div>
@@ -188,22 +252,72 @@ const showViewMore = !isFull && PROJECTS.length > 4; // La cantidad de proyectos
 </section>
 
 <style>
-    #projects-grid { display: flex; flex-wrap: wrap; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .mobile-content-wrapper { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease; }
-    @media (min-width: 1024px) { .mobile-content-wrapper { grid-template-rows: 1fr; opacity: 1; } }
-    .project-card.is-expanded .mobile-content-wrapper { grid-template-rows: 1fr; opacity: 1; margin-top: 1rem; }
-    .project-card.is-expanded .chevron-icon { transform: rotate(180deg); }
-    .project-card.hidden-card { display: none; }
-    .project-filter-btn.active-filter {
-        background-color: var(--color-cyan) !important;
-        color: #0f172a !important; /* slate-900 */
-        box-shadow: 0 0 20px rgba(0, 193, 253, 0.4);
-        transform: scale(1.02);
+    #projects-grid { 
+        display: flex; 
+        flex-wrap: wrap; 
     }
 
-    /* Ajuste para que el icono del botón activo no se pierda */
-    .active-filter svg {
-        stroke: #0f172a;
+    .no-scrollbar::-webkit-scrollbar { 
+        display: none; 
+    }
+
+    .project-card {
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: opacity, transform;
+    }
+
+    .mobile-content-wrapper { 
+        display: grid; 
+        grid-template-rows: 0fr; 
+        opacity: 0; 
+        transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+                    opacity 0.4s ease; 
+    }
+
+    @media (min-width: 1024px) { 
+        .mobile-content-wrapper { 
+            grid-template-rows: 1fr; 
+            opacity: 1; 
+        } 
+    }
+
+    .project-card.is-expanded .mobile-content-wrapper { 
+        grid-template-rows: 1fr; 
+        opacity: 1; 
+        margin-top: 1rem; 
+    }
+
+    .project-card.is-expanded .chevron-icon { 
+        transform: rotate(180deg); 
+    }
+
+    .project-filter-btn {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+    .project-filter-btn.active-filter {
+        background-color: var(--color-cyan) !important;
+        color: #020617 !important; /* Slate 950 para contraste máximo */
+        box-shadow: 0 4px 20px rgba(0, 193, 253, 0.4);
+        transform: scale(1.05);
+    }
+
+    .project-filter-btn.active-filter svg {
+        stroke: #020617 !important;
+    }
+
+    .project-filter-btn.active-filter .active-glow {
+        opacity: 1 !important;
+    }
+
+    .project-filter-btn:not(.active-filter):hover {
+        background-color: rgba(0, 193, 253, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .project-card.hidden-card { 
+        display: none; 
     }
 </style>
