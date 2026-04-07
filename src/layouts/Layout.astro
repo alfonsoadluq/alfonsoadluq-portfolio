@@ -3,6 +3,9 @@ import '../styles/global.css'
 import '@fontsource-variable/inter/wght.css';
 import '@fontsource/poppins/500.css';
 
+import { ClientRouter } from 'astro:transitions';
+import Analytics from '@vercel/analytics/astro'
+
 import Seo from '@components/Seo.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
@@ -17,17 +20,28 @@ import Footer from '@components/Footer.astro';
 		<meta name="generator" content={Astro.generator} />
 		<Seo title="Portfolio de Alfonso Adiego Luque - Desarrollador FullStack Junior" description="Soy Alfonso Adiego Luque, desarrollador FullStack Junior. Explora mis proyectos y descubre cómo puedo ayudarte a desarrollar tus ideas." />
 		<script is:inline>
-			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-				return localStorage.getItem('theme');
+			const applyTheme = () => {
+				const theme = (() => {
+					if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+						return localStorage.getItem('theme');
+					}
+					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						return 'dark';
+					}
+					return 'light';
+				})();
+				document.documentElement.setAttribute('data-theme', theme);
+				if (theme === 'dark') {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
 				}
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				return 'dark';
-				}
-				return 'light';
-			})();
-			document.documentElement.setAttribute('data-theme', theme);
+			};
+			applyTheme();
+			document.addEventListener('astro:after-swap', applyTheme);
 		</script>
+		<ClientRouter />
+		<Analytics/>
 	</head>
 	<body>
 		<div id="cursor" class="cursor"></div>

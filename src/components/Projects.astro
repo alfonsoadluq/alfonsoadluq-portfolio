@@ -60,14 +60,29 @@ const showViewMore = !isFull && PROJECTS.length > 4; // La cantidad de proyectos
                 Proyectos
             </h2>
         )}
-
-        <div class="flex flex-wrap justify-center gap-3 md:gap-4 bg-slate-50 dark:bg-[#050b18]/60 rounded-full">
-            {FILTERS.map((filter, idx) => (
-                <button data-filter={filter.id} class={`project-filter-btn flex flex-col items-center justify-center gap-2 w-20 h-20 md:w-24 md:h-24 rounded-full hover:scale-105 transition-all duration-300 cursor-pointer outline-none ${idx === 0 ? 'text-cyan shadow-lg scale-105' : 'bg-slate-50 dark:bg-[#050b18]/60 text-slate-500 dark:text-slate-400 hover:text-cyan'}`}>
-                    <div class="w-6 h-6 md:w-7 md:h-7"><Fragment set:html={filter.icon} /></div>
-                    <span class="font-black uppercase text-[10px] tracking-wide">{filter.title}</span>
-                </button>
-            ))}
+        
+        <!-- Contenedor de Filtros -->
+        <div class="inline-flex p-1.5 bg-slate-100/50 dark:bg-white/10 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl md:rounded-full gap-1 mb-12">
+        {FILTERS.map((filter, idx) => (
+            <button 
+            data-filter={filter.id} 
+            class={`project-filter-btn group relative flex items-center gap-2.5 px-5 py-2.5 rounded-xl md:rounded-full transition-all duration-400 cursor-pointer outline-none overflow-hidden
+            ${idx === 0 
+                ? 'active-filter bg-cyan text-slate-950 shadow-[0_0_15px_rgba(0,193,253,0.3)]' 
+                : 'text-slate-500 dark:text-slate-400 hover:text-cyan'
+            }`}
+            >
+            <div class="w-4.5 h-4.5 transition-transform group-hover:scale-110 pointer-events-none">
+                <Fragment set:html={filter.icon} />
+            </div>
+            <span class="font-black uppercase text-[10px] tracking-[0.1em] whitespace-nowrap pointer-events-none">
+                {filter.title}
+            </span>
+            
+            {/* Efecto de brillo solo para el activo */}
+            <div class="active-glow absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 pointer-events-none transition-opacity duration-500"></div>
+            </button>
+        ))}
         </div>
     </div>
 
@@ -180,4 +195,15 @@ const showViewMore = !isFull && PROJECTS.length > 4; // La cantidad de proyectos
     .project-card.is-expanded .mobile-content-wrapper { grid-template-rows: 1fr; opacity: 1; margin-top: 1rem; }
     .project-card.is-expanded .chevron-icon { transform: rotate(180deg); }
     .project-card.hidden-card { display: none; }
+    .project-filter-btn.active-filter {
+        background-color: var(--color-cyan) !important;
+        color: #0f172a !important; /* slate-900 */
+        box-shadow: 0 0 20px rgba(0, 193, 253, 0.4);
+        transform: scale(1.02);
+    }
+
+    /* Ajuste para que el icono del botón activo no se pierda */
+    .active-filter svg {
+        stroke: #0f172a;
+    }
 </style>

@@ -25,6 +25,17 @@ export const EXPERIENCE = [
     ],
     skills: ["Laravel", "Python", "Django", "Postman", "API REST"],
   },
+  {
+    date: "Enero 2025 - Marzo 2025",
+    title: "BackEnd Developer (Prácticas)",
+    company: "Taller Empresarial 2.0",
+    location: "Córdoba",
+    details: [
+      "Desarrollo de una plataforma web con Laravel para la gestión y facturación de servicios de hosting.",
+      "Participación en la creación de la interfaz del sistema mediante Django, realizando pruebas de endpoints con Postman.",
+    ],
+    skills: ["Laravel", "Python", "Django", "Postman", "API REST"],
+  },
 ];
 
 const isHomePage = !Astro.url.pathname.includes('all-experience');
@@ -58,7 +69,7 @@ const showViewMore = isHomePage && EXPERIENCE.length > 2;
 
     {showViewMore && (
       <div class="mt-20 flex justify-center md:justify-start md:ml-20">
-          <a href="/AllExperience" class="group btn-cyber flex items-center gap-3 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest text-white shadow-lg active:scale-95 transition-all">
+          <a href="/AllExperience" title="Ver toda la experiencia" aria-label="Ver toda la experiencia" class="group btn-cyber flex items-center gap-3 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest text-white shadow-lg active:scale-95 transition-all">
               Ver toda la experiencia
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
           </a>

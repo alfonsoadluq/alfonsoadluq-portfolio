@@ -50,6 +50,9 @@ const buttonData = [
                     width={40}
                     height={32}
                     formats={["avif", "webp"]}
+                    loading="lazy"
+                    fetchpriority="low"
+                    decoding="async"
                     class="w-10 h-auto transition-all duration-500"
                 />
             </a>
@@ -62,7 +65,7 @@ const buttonData = [
                 Diseñado y desarrollado por <br class="block md:hidden" />
                 <span class="text-cyan font-bold">Alfonso Adiego Luque</span>
             </span>
-            <span class="md:text-xs text-muted uppercase tracking-widest mt-1">
+            <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">
                 &copy; {currentYear} · Todos los derechos reservados
             </span>
         </div>
