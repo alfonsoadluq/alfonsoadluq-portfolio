@@ -33,29 +33,32 @@ const typeWritingData = {
                 Alfonso Adiego Luque
             </h1>
 
-            <p class="text-text-muted tracking-[0.05rem] md:tracking-[0.1rem] md:text-[1.5rem] lg:text-[1rem] w-full max-w-full leading-relaxed whitespace-pre-line">
+            <p class="text-text-muted tracking-[0.05rem] md:tracking-[0.1rem] md:text-[1.5rem] lg:text-[1rem] w-full max-w-[95%] leading-relaxed whitespace-pre-line">
                 {welcomeData.description}
             </p>
         </div>
         
         <!-- Columna derecha (Para fotos o logo) -->
-        <div class="flex justify-center items-center order-2 perspective-container">
+        <div class="flex justify-center items-center order-2 perspective-container lg:h-full lg:items-center lg:justify-center">
             <div id="logo-3d" class="relative transition-transform duration-200 ease-out floating-logo">
-                <div class="absolute inset-0 bg-cyan/20 blur-[80px] rounded-full opacity-40"></div>
-                
-                <Picture
-                    src={Images.logos.logoAlfonso}
-                    alt="Logo 3D"
-                    width={450}
-                    height={450}
-                    widths={[200, 300, 400, 600]}
-                    sizes="(max-width: 768px) 128px, (max-width: 1024px) 192px, 100%"
-                    formats={["avif", "webp"]}
-                    loading="eager"
-                    fetchpriority="high"
-                    decoding="async"
-                    class="relative z-10 w-32 md:w-48 lg:w-112.5 h-auto object-contain drop-shadow-[0_20px_10px_rgba(0,0,0,0.5)]"
-                />
+                <!-- halo background removed (ring will provide the glow) -->
+                <div class="photo-ring rounded-full">
+                    <div class="photo-content rounded-full">
+                        <Picture
+                            src={Images.logos.logoAlfonso}
+                            alt="Logo 3D"
+                            width={450}
+                            height={450}
+                            widths={[200, 300, 400, 600]}
+                            sizes="(max-width: 768px) 128px, (max-width: 1024px) 192px, 100%"
+                            formats={["avif", "webp"]}
+                            loading="eager"
+                            fetchpriority="high"
+                            decoding="async"
+                            class="welcome-photo rounded-full w-32 md:w-48 lg:w-[350px] h-auto object-contain drop-shadow-[0_20px_10px_rgba(0,0,0,0.5)]"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -64,6 +67,48 @@ const typeWritingData = {
 <style>
     .perspective-container {
         perspective: 3500px;
+    }
+
+    /* Foto circular con borde animado similar a .card-border-glow */
+    .photo-ring {
+        position: relative;
+        display: inline-block;
+        border-radius: 9999px;
+        padding: 2px;
+        background: rgba(255, 255, 255, 0.03);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .photo-ring::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(transparent, var(--color-cyan), var(--color-purple), transparent 30%);
+        animation: rotate 4s linear infinite;
+        opacity: 1;
+        border-radius: 9999px;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+    }
+
+    .photo-content {
+        position: relative;
+        z-index: 1;
+        border-radius: 9999px;
+        overflow: hidden;
+        background: var(--bg-bottom);
+    }
+
+    .welcome-photo {
+        display: block;
+        border-radius: 9999px;
+        position: relative;
+        z-index: 2;
     }
 
     .welcome-grid {
