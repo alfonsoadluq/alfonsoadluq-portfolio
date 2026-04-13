@@ -15,11 +15,11 @@ const typeWritingData = {
 }
 ---
 
-<section id={`${Astro.props.id}`} class="max-w-6xl mx-auto px-6 md:px-5 pt-30 md:pt-45 pb-20 overflow-visible">
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+<section id={`${Astro.props.id}`} class="max-w-6xl mx-auto px-6 md:px-5 pt-30 md:pt-45 pb-20 overflow-visible lg:min-h-screen">
+    <div class="grid grid-cols-1 gap-12 items-center welcome-grid">
         
         <!-- Columna izquierda -->
-        <div class="flex flex-col items-start lg:col-span-4 order-2 lg:order-1">
+        <div class="flex flex-col items-start order-1 lg:justify-center">
             <h2 class="text-cyan inline-block font-bold tracking-[0.2rem] md:tracking-[0.25rem] mb-6 border border-cyan/20 bg-cyan/5 px-4 py-2 rounded-full shadow-[0_0_15px_rgba(0,193,253,0.1)] whitespace-nowrap text-[10px] md:text-[1rem] lg:text-[12px] md:text-xs uppercase">
                 &lt; 
                 <span id="typewriter" data-words={JSON.stringify(Object.values(typeWritingData))}></span>
@@ -27,38 +27,35 @@ const typeWritingData = {
                 /&gt;
             </h2>
 
-            <p class="text-text-muted font-medium mb-2 md:text-[1.5rem] lg:text-base">Bienvenido, soy</p>
+            <p class="text-text-muted tracking-[0.05rem] md:tracking-[0.1rem] md:text-[1.5rem] lg:text-[1rem] w-full max-w-full leading-relaxed whitespace-pre-line">Bienvenido, soy</p>
             
             <h1 class="animate-gradient-text mb-6 text-4xl md:text-6xl lg:text-8xl font-black leading-[1.1] tracking-tighter">
                 Alfonso Adiego Luque
             </h1>
 
-            <p class="text-text-muted tracking-[0.05rem] md:tracking-[0.1rem] md:text-[1.5rem] lg:text-[1rem] md:max-w-full lg:max-w-xl leading-relaxed whitespace-pre-line">
+            <p class="text-text-muted tracking-[0.05rem] md:tracking-[0.1rem] md:text-[1.5rem] lg:text-[1rem] w-full max-w-[85] leading-relaxed whitespace-pre-line">
                 {welcomeData.description}
             </p>
         </div>
         
         <!-- Columna derecha (Para fotos o logo) -->
-        <div class="lg:col-span-1 flex justify-center items-center order-1 lg:order-2 perspective-container">
+        <div class="flex justify-center items-center order-2 perspective-container">
             <div id="logo-3d" class="relative transition-transform duration-200 ease-out floating-logo">
-                <div class="absolute inset-0 bg-cyan/20 blur-[60px] rounded-full scale-110 opacity-50"></div>
+                <div class="absolute inset-0 bg-cyan/20 blur-[80px] rounded-full opacity-40"></div>
                 
-                <!-- 
                 <Picture
-                src={Images.logos.logoAlfonso}
-                alt="Logo 3D"
-                width={400}
-                height={400}
-                widths={[200, 300, 400, 600]}
-                sizes="(max-width: 768px) 128px, (max-width: 1024px) 192px, 100%"
-                formats={["avif", "webp"]}
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-                class="relative z-10 w-32 md:w-48 lg:w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
+                    src={Images.logos.logoAlfonso}
+                    alt="Logo 3D"
+                    width={450}
+                    height={450}
+                    widths={[200, 300, 400, 600]}
+                    sizes="(max-width: 768px) 128px, (max-width: 1024px) 192px, 100%"
+                    formats={["avif", "webp"]}
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
+                    class="relative z-10 w-32 md:w-48 lg:w-112.5 h-auto object-contain drop-shadow-[0_20px_10px_rgba(0,0,0,0.5)]"
                 />
-                -->
-                
             </div>
         </div>
     </div>
@@ -66,7 +63,22 @@ const typeWritingData = {
 
 <style>
     .perspective-container {
-        perspective: 1000px;
+        perspective: 3500px;
+    }
+
+    .welcome-grid {
+        grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 1024px) {
+        .welcome-grid {
+            grid-template-columns: 1fr auto;
+        }
+
+        /* Si la columna de la derecha no contiene imagen/picture, ocultarla */
+        .perspective-container:not(:has(img)):not(:has(picture)) {
+            display: none;
+        }
     }
 
     .typewriter-cursor {
